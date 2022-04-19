@@ -1,0 +1,30 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+#titulo{
+    color: red;
+    text-align: center;
+    padding: 20px;
+    border: solid red 2px;
+    margin: 10px;
+}
+
+body{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    border: solid red 2px;
+    text-align: center;
+}
+
+div{
+    margin: 0px auto;
+    padding: 50px;
+    border: solid red 2px;
+    margin: 10px;
+}
