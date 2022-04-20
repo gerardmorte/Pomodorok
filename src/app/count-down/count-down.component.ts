@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-count-down',
@@ -9,43 +8,41 @@ import { interval } from 'rxjs';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
 
-  minutes: number = 10;
-  seconds: number = 3;
-  fecha = new Date();
-
-  constructor() {
-    this.fecha.setMinutes(this.minutes);
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
-  // Añadir el cero en números menores de 10
-  actualizarHora(i: string) {
+  updateTime(i: string) {
     if (Number(i) < 10) {
-      i = "0" + i;
+      i = '0' + i;
     }
     return i;
   }
 
-  countDown() {
-    const contador = interval(1000);
+  countDown(min: number, sec: number) {
+    let minutes: number = min;
+    let seconds: number = sec;
 
-    contador.subscribe((n) => {
+    const contador = setInterval(() => {
+      let fecha = new Date();
+      fecha.setMinutes(minutes);
+      fecha.setSeconds(seconds);
+      seconds--;
 
-      this.seconds--;
+      let minutos: string = String(fecha.getMinutes());
+      let segundos: string = String(fecha.getSeconds());
 
-      this.fecha.setSeconds(this.seconds);
-
-      let minutos: string = String(this.fecha.getMinutes());
-
-      let segundos: string = String(this.fecha.getSeconds());
-
-      minutos = this.actualizarHora(minutos);
-      segundos = this.actualizarHora(segundos);
-
+      minutos = this.updateTime(minutos);
+      segundos = this.updateTime(segundos);
       this.date.nativeElement.innerHTML = minutos + ':' + segundos;
 
-    });
-
+      if (minutes == 0 && seconds == 0) {
+        clearInterval(contador);
+      }
+    }, 1000);
   }
+
+  startCountDown() {}
+
+  stopCountDown() {}
 }
