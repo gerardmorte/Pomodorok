@@ -2,6 +2,12 @@
 
     <h1 #reloj>25:00</h1>
 
-    <button class="btn btn-warning btn-lg" (click)="countDown(25, 0)">INICIAR</button>
+    <button class="btn btn-warning btn-lg" (click)="resetCountDown()">RESET</button>
+
+    <button class="btn btn-warning btn-lg" (click)="btnStart(25, 0)">START</button>
+
+    <button class="btn btn-warning btn-lg" (click)="stopCountDown(contador)">STOP</button>
+
+    <button class="btn btn-warning btn-lg" (click)="nextCountDown()">NEXT</button>
 
 </div>

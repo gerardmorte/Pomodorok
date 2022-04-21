@@ -7,10 +7,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
+  contador: any;
+  initialMinutes: number;
+  initialSeconds: number;
+  minutes: number;
+  seconds: number;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   updateTime(i: string) {
     if (Number(i) < 10) {
@@ -20,14 +25,15 @@ export class CountDownComponent implements OnInit {
   }
 
   countDown(min: number, sec: number) {
-    let minutes: number = min;
-    let seconds: number = sec;
+    this.initialMinutes = min;
+    this.initialSeconds = sec;
+    this.minutes = this.initialMinutes;
+    this.seconds = this.initialSeconds;
 
-    const contador = setInterval(() => {
+    this.contador = setInterval(() => {
       let fecha = new Date();
-      fecha.setMinutes(minutes);
-      fecha.setSeconds(seconds);
-      seconds--;
+      fecha.setMinutes(this.minutes);
+      fecha.setSeconds(this.seconds);
 
       let minutos: string = String(fecha.getMinutes());
       let segundos: string = String(fecha.getSeconds());
@@ -36,13 +42,36 @@ export class CountDownComponent implements OnInit {
       segundos = this.updateTime(segundos);
       this.date.nativeElement.innerHTML = minutos + ':' + segundos;
 
-      if (minutes == 0 && seconds == 0) {
-        clearInterval(contador);
+      if (this.minutes == 0 && this.seconds == 0) {
+        this.stopCountDown(this.contador);
       }
+
+      this.seconds--;
     }, 1000);
   }
 
-  startCountDown() {}
+  stopCountDown(timer: any) {
+    clearInterval(timer);
+  }
 
-  stopCountDown() {}
+  restartCountDown() {
+    this.countDown(this.minutes, this.seconds);
+  }
+
+  btnStart(min: number, sec: number) {
+    if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
+      this.countDown(min, sec);
+    } else {
+      this.restartCountDown();
+    }
+  }
+
+  resetCountDown() {
+
+  }
+
+  nextCountDown() {
+
+  }
+
 }
