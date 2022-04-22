@@ -7,6 +7,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
+  @ViewChild('start') buttonStart: ElementRef;
+
   contador: any;
   initialMinutes: number;
   initialSeconds: number;
@@ -52,6 +54,7 @@ export class CountDownComponent implements OnInit {
 
   stopCountDown(timer: any) {
     clearInterval(timer);
+    this.buttonStart.nativeElement.disabled = false;
   }
 
   restartCountDown() {
@@ -59,10 +62,15 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
+    let clicado: Number = 0;
+
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
+      this.buttonStart.nativeElement.disabled = true;
+
     } else {
       this.restartCountDown();
+      this.buttonStart.nativeElement.disabled = true;
     }
   }
 

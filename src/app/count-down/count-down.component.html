@@ -4,10 +4,11 @@
 
     <button class="btn btn-warning btn-lg" (click)="resetCountDown()">RESET</button>
 
-    <button class="btn btn-warning btn-lg" (click)="btnStart(25, 0)">START</button>
+    <button #start class="btn btn-warning btn-lg" (click)="btnStart(25, 0)">START</button>
 
     <button class="btn btn-warning btn-lg" (click)="stopCountDown(contador)">STOP</button>
 
     <button class="btn btn-warning btn-lg" (click)="nextCountDown()">NEXT</button>
 
 </div>
+
