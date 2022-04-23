@@ -10,10 +10,15 @@ export class CountDownComponent implements OnInit {
   @ViewChild('start') buttonStart: ElementRef;
 
   contador: any;
+  setMinutes: number = 25;
+  setSeconds: number = 0;
   initialMinutes: number;
   initialSeconds: number;
   minutes: number;
   seconds: number;
+  break: boolean = false;
+  contadorBreaks: number = 0;
+
 
   constructor() { }
 
@@ -26,9 +31,9 @@ export class CountDownComponent implements OnInit {
     return i;
   }
 
-  countDown(min: number, sec: number) {
-    this.initialMinutes = min;
-    this.initialSeconds = sec;
+  countDown(setMinutes: number, setSeconds: number) {
+    this.initialMinutes = setMinutes;
+    this.initialSeconds = setSeconds;
     this.minutes = this.initialMinutes;
     this.seconds = this.initialSeconds;
 
@@ -50,11 +55,13 @@ export class CountDownComponent implements OnInit {
 
       this.seconds--;
     }, 1000);
+
   }
 
   stopCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
+    this.date.nativeElement.innerHTML = "STOP"; //PROVISIONAL
   }
 
   restartCountDown() {
@@ -62,7 +69,6 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
-    let clicado: Number = 0;
 
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
@@ -72,14 +78,56 @@ export class CountDownComponent implements OnInit {
       this.restartCountDown();
       this.buttonStart.nativeElement.disabled = true;
     }
-  }
-
-  resetCountDown() {
 
   }
 
   nextCountDown() {
+    this.stopCountDown(this.contador);
 
+    if (this.contadorBreaks == 3 && !this.break) {
+      let finalBreak: boolean = false;
+
+      if (finalBreak) {
+        this.setMinutes = 15;
+        this.setSeconds = 0;
+      } else {
+        this.setMinutes = 30;
+        this.setSeconds = 0;
+      }
+
+      this.countDown(this.setMinutes, this.setSeconds);
+      this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+      this.break = true;
+      this.contadorBreaks = 0;
+      console.log(this.contadorBreaks);
+
+    } else if (!this.break) {
+      this.setMinutes = 5;
+      this.setSeconds = 0;
+      this.countDown(this.setMinutes, this.setSeconds);
+      this.date.nativeElement.innerHTML = "0" + this.setMinutes + ':' + this.setSeconds + "0";
+      this.break = true;
+      this.contadorBreaks++;
+      console.log(this.contadorBreaks);
+
+    } else {
+      this.setMinutes = 25;
+      this.setSeconds = 0;
+      this.countDown(this.setMinutes, this.setSeconds);
+      this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+      this.break = false;
+    }
+
+    this.stopCountDown(this.contador);
+
+    if(this.contadorBreaks == 0 && this.break){
+      this.date.nativeElement.innerHTML = '<button class="">15´</button><button class="">30´</button>';
+    }
+    else if (this.break)
+      this.date.nativeElement.innerHTML = "BREAK";
+    else {
+      this.date.nativeElement.innerHTML = "FOCUS";
+    }
   }
 
 }

@@ -1,14 +1,14 @@
 <div class="container">
 
-    <h1 #reloj>25:00</h1>
+    <h1 id="reloj" #reloj>FOCUS</h1> <!-- {{setMinutes}}:{{setSeconds}}0 -->
 
-    <button class="btn btn-warning btn-lg" (click)="resetCountDown()">RESET</button>
-
-    <button #start class="btn btn-warning btn-lg" (click)="btnStart(25, 0)">START</button>
+    <button #start class="btn btn-warning btn-lg" (click)="btnStart(setMinutes, setSeconds)">START</button>
 
     <button class="btn btn-warning btn-lg" (click)="stopCountDown(contador)">STOP</button>
 
-    <button class="btn btn-warning btn-lg" (click)="nextCountDown()">NEXT</button>
+    <button #next class="btn btn-warning btn-lg" (click)="nextCountDown()">NEXT</button>
 
 </div>
+
+
 
