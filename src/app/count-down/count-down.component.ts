@@ -8,7 +8,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
-  // @ViewChild('shortBreak5') shortBreak5: ElementRef;
   @ViewChild('longBreak15') longBreak15: ElementRef;
   @ViewChild('longBreak30') longBreak30: ElementRef;
 
@@ -58,7 +57,9 @@ export class CountDownComponent implements OnInit {
       this.date.nativeElement.innerHTML = minutos + ':' + segundos;
 
       if (this.minutes == 0 && this.seconds == 0) {
+        this.playSound();
         this.stopCountDown(this.contador);
+        this.nextCountDown();
       }
       this.seconds--;
 
@@ -90,26 +91,21 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
-    console.log(this.contadorBreaks)
     this.stopCountDown(this.contador);
-
     if (this.contadorBreaks == 3 && !this.break) {
-      // this.shortBreak5.nativeElement.disabled = true;
       this.longBreak15.nativeElement.disabled = false;
       this.longBreak30.nativeElement.disabled = false;
       this.longBreak15.nativeElement.id = "flashingText";
       this.longBreak30.nativeElement.id = "flashingText";
-
       this.date.nativeElement.innerHTML = "00:00";
-
+      this.buttonStart.nativeElement.disabled = true;
     } else if (!this.break) {
       this.shortBreak(5, 0);
-
+      this.stopCountDown(this.contador);
     } else {
       this.focusTime(25, 0);
+      this.stopCountDown(this.contador);
     }
-
-    this.stopCountDown(this.contador);
   }
 
   focusTime(min: number, sec: number) {
@@ -141,6 +137,13 @@ export class CountDownComponent implements OnInit {
     this.stopCountDown(this.contador);
     this.longBreak15.nativeElement.disabled = true;
     this.longBreak30.nativeElement.disabled = true;
+  }
+
+  playSound() {
+    let audio = new Audio();
+    audio.src = ".//src/assets/audio/notification.wav";
+    audio.load();
+    audio.play();
   }
 
 }

@@ -1,3 +1,10 @@
 h1{
     text-align: center;
+    font-size: 3em;
+}
+
+body{
+    background-image: url(src/assets/img/wallpaper.jpg);
+    height: 100vh;
+    width: 100vw;
 }
