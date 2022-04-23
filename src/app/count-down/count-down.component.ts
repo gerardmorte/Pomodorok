@@ -8,7 +8,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
-
+  @ViewChild('shortBreak5') shortBreak5: ElementRef;
+  @ViewChild('longBreak15') longBreak15: ElementRef;
+  @ViewChild('longBreak30') longBreak30: ElementRef;
 
   contador: any;
   setMinutes: number = 25;
@@ -20,10 +22,15 @@ export class CountDownComponent implements OnInit {
   break: boolean = false;
   contadorBreaks: number = 0;
 
-
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+
+  ngAfterViewInit(){
+    this.longBreak15.nativeElement.disabled = true;
+    this.longBreak30.nativeElement.disabled = true;
+  }
+
 
   updateTime(i: string) {
     if (Number(i) < 10) {
@@ -84,6 +91,9 @@ export class CountDownComponent implements OnInit {
 
     if (this.contadorBreaks == 3 && !this.break) {
       let finalBreak: boolean = false;
+      //this.shortBreak5.nativeElement.disabled = true;
+      this.longBreak15.nativeElement.disabled = false;
+      this.longBreak30.nativeElement.disabled = false;
 
       if (finalBreak) {
         this.setMinutes = 15;
@@ -115,8 +125,6 @@ export class CountDownComponent implements OnInit {
     }
 
     this.stopCountDown(this.contador);
-
-
   }
 
 }

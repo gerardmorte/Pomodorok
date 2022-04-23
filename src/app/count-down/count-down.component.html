@@ -1,6 +1,17 @@
 <div class="container">
 
-    <h1 id="reloj" #reloj class="p-3 mb-2 bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
+    <button #shortBreak5 class="btn btn-warning btn-lg shadow-lg">5' SHORT BREAK</button>
+
+    <button #longBreak15 class="btn btn-warning btn-lg shadow-lg">15' LONG BREAK</button>
+    
+    <button #longBreak30 class="btn btn-warning btn-lg shadow-lg">30' LONG BREAK</button>
+    
+</div>
+
+
+<div class="container">
+
+    <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
 
     <button #start class="btn btn-warning btn-lg shadow-lg" (click)="btnStart(setMinutes, setSeconds)">START</button>
 
@@ -9,3 +20,6 @@
     <button #next class="btn btn-warning btn-lg shadow-lg" (click)="nextCountDown()">NEXT</button>
 
 </div>
+
+
+
