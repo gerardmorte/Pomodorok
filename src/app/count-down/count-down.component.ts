@@ -53,8 +53,8 @@ export class CountDownComponent implements OnInit {
       if (this.minutes == 0 && this.seconds == 0) {
         this.stopCountDown(this.contador);
       }
-
       this.seconds--;
+
     }, 1000);
 
   }
@@ -62,7 +62,6 @@ export class CountDownComponent implements OnInit {
   stopCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
-    // this.date.nativeElement.innerHTML = "STOP"; //PROVISIONAL
   }
 
   restartCountDown() {
@@ -70,7 +69,6 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
-
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
       this.buttonStart.nativeElement.disabled = true;
@@ -79,7 +77,6 @@ export class CountDownComponent implements OnInit {
       this.restartCountDown();
       this.buttonStart.nativeElement.disabled = true;
     }
-
   }
 
   nextCountDown() {
@@ -100,7 +97,6 @@ export class CountDownComponent implements OnInit {
       this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
       this.break = true;
       this.contadorBreaks = 0;
-      console.log(this.contadorBreaks);
 
     } else if (!this.break) {
       this.setMinutes = 5;
@@ -109,7 +105,6 @@ export class CountDownComponent implements OnInit {
       this.date.nativeElement.innerHTML = "0" + this.setMinutes + ':' + this.setSeconds + "0";
       this.break = true;
       this.contadorBreaks++;
-      console.log(this.contadorBreaks);
 
     } else {
       this.setMinutes = 25;
@@ -121,14 +116,7 @@ export class CountDownComponent implements OnInit {
 
     this.stopCountDown(this.contador);
 
-    // if(this.contadorBreaks == 0 && this.break){
-    //   this.date.nativeElement.innerHTML = "FINAL BREAK"; //'<button class="chooseBreakTime">15´</button><button class="chooseBreakTime">30´</button>'
-    // }
-    // else if (this.break)
-    //   this.date.nativeElement.innerHTML = "BREAK";
-    // else {
-    //   this.date.nativeElement.innerHTML = "FOCUS";
-    // }
+
   }
 
 }

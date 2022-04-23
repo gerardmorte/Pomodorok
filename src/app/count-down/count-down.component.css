@@ -10,15 +10,23 @@ h1 {
 button {
     margin: 10px;
     border-radius: 10px;
+    width: 92px;
+    font-family: 'digitalClock';
+    font-size: 1.5em;
 }
 
-#reloj{  
-    font-size: 7em;
-    width: max-content;
+#reloj {
+    font-size: 8em;
+    width: 320px;
+    height: auto;
     margin: 0px auto;
     border-radius: 15px;
+    font-family: 'digitalClock'
 }
 
-
-
-
+@font-face {
+    font-family: "digitalClock";
+    src: url("src/assets/font/DS-DIGI.TTF") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
