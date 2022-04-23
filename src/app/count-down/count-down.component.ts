@@ -8,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
+  @ViewChild('stop') buttonStop: ElementRef;
   @ViewChild('longBreak15') longBreak15: ElementRef;
   @ViewChild('longBreak30') longBreak30: ElementRef;
 
@@ -18,8 +19,13 @@ export class CountDownComponent implements OnInit {
   initialSeconds: number;
   minutes: number;
   seconds: number;
+  textMinutes: string;
+  textSeconds: string;
+  sendMinutes: number;
+  sendSeconds: number;
   break: boolean = false;
   contadorBreaks: number = 0;
+  finPomodoro: Date = new Date();
 
   constructor() { }
 
@@ -38,9 +44,9 @@ export class CountDownComponent implements OnInit {
     return i;
   }
 
-  countDown(setMinutes: number, setSeconds: number) {
-    this.initialMinutes = setMinutes;
-    this.initialSeconds = setSeconds;
+  countDown(min: number, sec: number) {
+    this.initialMinutes = min;
+    this.initialSeconds = sec;
     this.minutes = this.initialMinutes;
     this.seconds = this.initialSeconds;
 
@@ -49,16 +55,16 @@ export class CountDownComponent implements OnInit {
       fecha.setMinutes(this.minutes);
       fecha.setSeconds(this.seconds);
 
-      let minutos: string = String(fecha.getMinutes());
-      let segundos: string = String(fecha.getSeconds());
+      this.textMinutes = String(fecha.getMinutes());
+      this.textSeconds = String(fecha.getSeconds());
 
-      minutos = this.updateTime(minutos);
-      segundos = this.updateTime(segundos);
-      this.date.nativeElement.innerHTML = minutos + ':' + segundos;
+      this.textMinutes = this.updateTime(this.textMinutes);
+      this.textSeconds = this.updateTime(this.textSeconds);
+      this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
 
       if (this.minutes == 0 && this.seconds == 0) {
         this.playSound();
-        this.stopCountDown(this.contador);
+        this.pauseCountDown(this.contador);
         this.nextCountDown();
       }
       this.seconds--;
@@ -67,9 +73,13 @@ export class CountDownComponent implements OnInit {
 
   }
 
-  stopCountDown(timer: any) {
+  pauseCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
+    let totalMinutes = this.initialMinutes - Number(this.textMinutes) - 1;
+    let totalSeconds = 60 - Number(this.textSeconds);
+    this.sendMinutes = totalMinutes;
+    this.sendSeconds = totalSeconds;
   }
 
   restartCountDown() {
@@ -79,6 +89,10 @@ export class CountDownComponent implements OnInit {
   btnStart(min: number, sec: number) {
     this.longBreak15.nativeElement.id = "";
     this.longBreak30.nativeElement.id = "";
+
+    if (this.buttonStop.nativeElement.disabled = true) {
+      this.buttonStop.nativeElement.disabled = false;
+    }
 
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
@@ -91,7 +105,8 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
-    this.stopCountDown(this.contador);
+    console.log(this.contadorBreaks);
+    this.pauseCountDown(this.contador);
     if (this.contadorBreaks == 3 && !this.break) {
       this.longBreak15.nativeElement.disabled = false;
       this.longBreak30.nativeElement.disabled = false;
@@ -99,12 +114,13 @@ export class CountDownComponent implements OnInit {
       this.longBreak30.nativeElement.id = "flashingText";
       this.date.nativeElement.innerHTML = "00:00";
       this.buttonStart.nativeElement.disabled = true;
+      this.buttonStop.nativeElement.disabled = true;
     } else if (!this.break) {
       this.shortBreak(5, 0);
-      this.stopCountDown(this.contador);
+      this.pauseCountDown(this.contador);
     } else {
       this.focusTime(25, 0);
-      this.stopCountDown(this.contador);
+      this.pauseCountDown(this.contador);
     }
   }
 
@@ -134,7 +150,7 @@ export class CountDownComponent implements OnInit {
     this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
     this.break = true;
     this.contadorBreaks = 0;
-    this.stopCountDown(this.contador);
+    this.pauseCountDown(this.contador);
     this.longBreak15.nativeElement.disabled = true;
     this.longBreak30.nativeElement.disabled = true;
   }
@@ -144,6 +160,15 @@ export class CountDownComponent implements OnInit {
     audio.src = ".//src/assets/audio/notification.wav";
     audio.load();
     audio.play();
+  }
+
+  stopPomodoro() {
+    this.pauseCountDown(this.contador);
+    this.contadorBreaks = 0;
+    this.focusTime(25, 0);
+    this.pauseCountDown(this.contador);
+    this.buttonStop.nativeElement.disabled = false;
+    console.log(this.finPomodoro);
   }
 
 }
