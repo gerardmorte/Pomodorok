@@ -9,6 +9,7 @@ export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
 
+
   contador: any;
   setMinutes: number = 25;
   setSeconds: number = 0;
@@ -61,7 +62,7 @@ export class CountDownComponent implements OnInit {
   stopCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
-    this.date.nativeElement.innerHTML = "STOP"; //PROVISIONAL
+    // this.date.nativeElement.innerHTML = "STOP"; //PROVISIONAL
   }
 
   restartCountDown() {
@@ -120,14 +121,14 @@ export class CountDownComponent implements OnInit {
 
     this.stopCountDown(this.contador);
 
-    if(this.contadorBreaks == 0 && this.break){
-      this.date.nativeElement.innerHTML = '<button class="">15´</button><button class="">30´</button>';
-    }
-    else if (this.break)
-      this.date.nativeElement.innerHTML = "BREAK";
-    else {
-      this.date.nativeElement.innerHTML = "FOCUS";
-    }
+    // if(this.contadorBreaks == 0 && this.break){
+    //   this.date.nativeElement.innerHTML = "FINAL BREAK"; //'<button class="chooseBreakTime">15´</button><button class="chooseBreakTime">30´</button>'
+    // }
+    // else if (this.break)
+    //   this.date.nativeElement.innerHTML = "BREAK";
+    // else {
+    //   this.date.nativeElement.innerHTML = "FOCUS";
+    // }
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1 id="reloj" #reloj>FOCUS</h1> <!-- {{setMinutes}}:{{setSeconds}}0 -->
+    <h1 id="reloj" #reloj class="p-3 mb-2 bg-warning text-dark">{{setMinutes}}:{{setSeconds}}0</h1>
 
     <button #start class="btn btn-warning btn-lg" (click)="btnStart(setMinutes, setSeconds)">START</button>
 
@@ -9,6 +9,3 @@
     <button #next class="btn btn-warning btn-lg" (click)="nextCountDown()">NEXT</button>
 
 </div>
-
-
-

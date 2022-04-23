@@ -8,9 +8,17 @@ h1 {
 }
 
 button {
-    margin: 60px
+    margin: 10px;
+    border-radius: 10px;
 }
 
 #reloj{  
-    font-size: 10em;
+    font-size: 7em;
+    width: max-content;
+    margin: 0px auto;
+    border-radius: 15px;
 }
+
+
+
+
