@@ -20,7 +20,6 @@ export class CountDownComponent implements OnInit {
   minutes: number;
   seconds: number;
   break: boolean = false;
-  finalBreak: boolean;
   contadorBreaks: number = 0;
 
   constructor() { }
@@ -96,13 +95,9 @@ export class CountDownComponent implements OnInit {
       this.longBreak15.nativeElement.disabled = false;
       this.longBreak30.nativeElement.disabled = false;
 
-      this.finalBreak = true; //Com triar el break final?
+      this.longBreak(15, 0); //Com fer el set del longBreak abans de que comenci?
+     // this.longBreak(30, 0); //Com fer el set del longBreak abans de que comenci?
 
-      if (this.finalBreak) {
-        this.longBreak(22, 0);
-      } else {
-        this.longBreak(45, 0);
-      }
 
     } else if (!this.break) {
       this.shortBreak(5, 0);
