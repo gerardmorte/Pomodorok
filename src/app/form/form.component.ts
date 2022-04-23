@@ -6,11 +6,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  @ViewChild('newTask') newTask: ElementRef;
+ @ViewChild('newTask') newTask: ElementRef;
+
   inputForm: string;
   startPomodoro: Date;
   statisticsArray: any = [];
-
 
   constructor() { }
 
@@ -25,14 +25,5 @@ export class FormComponent implements OnInit {
     console.log(this.statisticsArray[0])
     console.log(this.statisticsArray[0].startPomodoro);
   }
-
-  // function addPlayer(nombre, puntos) {
-  //   let element = { nombre: nombre, puntos: puntos };
-
-  //   jugadores.push(element);
-
-  //   localStorageJugadores(jugadores);
-  // }
-
 
 }
