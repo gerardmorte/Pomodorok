@@ -8,7 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
-  @ViewChild('shortBreak5') shortBreak5: ElementRef;
+  // @ViewChild('shortBreak5') shortBreak5: ElementRef;
   @ViewChild('longBreak15') longBreak15: ElementRef;
   @ViewChild('longBreak30') longBreak30: ElementRef;
 
@@ -76,6 +76,9 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
+    this.longBreak15.nativeElement.id = "";
+    this.longBreak30.nativeElement.id = "";
+
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
       this.buttonStart.nativeElement.disabled = true;
@@ -91,13 +94,13 @@ export class CountDownComponent implements OnInit {
     this.stopCountDown(this.contador);
 
     if (this.contadorBreaks == 3 && !this.break) {
-      this.shortBreak5.nativeElement.disabled = true;
+      // this.shortBreak5.nativeElement.disabled = true;
       this.longBreak15.nativeElement.disabled = false;
       this.longBreak30.nativeElement.disabled = false;
+      this.longBreak15.nativeElement.id = "flashingText";
+      this.longBreak30.nativeElement.id = "flashingText";
 
-      this.longBreak(15, 0); //Com fer el set del longBreak abans de que comenci?
-     // this.longBreak(30, 0); //Com fer el set del longBreak abans de que comenci?
-
+      this.date.nativeElement.innerHTML = "00:00";
 
     } else if (!this.break) {
       this.shortBreak(5, 0);
@@ -135,6 +138,9 @@ export class CountDownComponent implements OnInit {
     this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
     this.break = true;
     this.contadorBreaks = 0;
+    this.stopCountDown(this.contador);
+    this.longBreak15.nativeElement.disabled = true;
+    this.longBreak30.nativeElement.disabled = true;
   }
 
 }
