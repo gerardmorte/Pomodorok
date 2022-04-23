@@ -20,13 +20,14 @@ export class CountDownComponent implements OnInit {
   minutes: number;
   seconds: number;
   break: boolean = false;
+  finalBreak: boolean;
   contadorBreaks: number = 0;
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.longBreak15.nativeElement.disabled = true;
     this.longBreak30.nativeElement.disabled = true;
   }
@@ -87,44 +88,58 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
+    console.log(this.contadorBreaks)
     this.stopCountDown(this.contador);
 
     if (this.contadorBreaks == 3 && !this.break) {
-      let finalBreak: boolean = false;
-      //this.shortBreak5.nativeElement.disabled = true;
+      this.shortBreak5.nativeElement.disabled = true;
       this.longBreak15.nativeElement.disabled = false;
       this.longBreak30.nativeElement.disabled = false;
 
-      if (finalBreak) {
-        this.setMinutes = 15;
-        this.setSeconds = 0;
+      this.finalBreak = true; //Com triar el break final?
+
+      if (this.finalBreak) {
+        this.longBreak(22, 0);
       } else {
-        this.setMinutes = 30;
-        this.setSeconds = 0;
+        this.longBreak(45, 0);
       }
 
-      this.countDown(this.setMinutes, this.setSeconds);
-      this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
-      this.break = true;
-      this.contadorBreaks = 0;
-
     } else if (!this.break) {
-      this.setMinutes = 5;
-      this.setSeconds = 0;
-      this.countDown(this.setMinutes, this.setSeconds);
-      this.date.nativeElement.innerHTML = "0" + this.setMinutes + ':' + this.setSeconds + "0";
-      this.break = true;
-      this.contadorBreaks++;
+      this.shortBreak(5, 0);
 
     } else {
-      this.setMinutes = 25;
-      this.setSeconds = 0;
-      this.countDown(this.setMinutes, this.setSeconds);
-      this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
-      this.break = false;
+      this.focusTime(25, 0);
     }
 
     this.stopCountDown(this.contador);
+  }
+
+  focusTime(min: number, sec: number) {
+    this.setMinutes = min;
+    this.setSeconds = sec;
+    this.countDown(this.setMinutes, this.setSeconds);
+    this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+    this.break = false;
+    this.longBreak15.nativeElement.disabled = true;
+    this.longBreak30.nativeElement.disabled = true;
+  }
+
+  shortBreak(min: number, sec: number) {
+    this.setMinutes = min;
+    this.setSeconds = sec;
+    this.countDown(this.setMinutes, this.setSeconds);
+    this.date.nativeElement.innerHTML = "0" + this.setMinutes + ':' + this.setSeconds + "0";
+    this.break = true;
+    this.contadorBreaks++;
+  }
+
+  longBreak(min: number, sec: number) {
+    this.setMinutes = min;
+    this.setSeconds = sec;
+    this.countDown(this.setMinutes, this.setSeconds);
+    this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+    this.break = true;
+    this.contadorBreaks = 0;
   }
 
 }
