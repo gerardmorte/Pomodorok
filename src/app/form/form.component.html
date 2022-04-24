@@ -1,16 +1,14 @@
 <div class="container">
 
-    <button #newTask style="width: 148px; height: 50px;" class="btn btn-warning btn-sm shadow-lg" type="submit"
-        (click)="addTask()">NEW TASK</button>
+    <button #newTask class="btn btn-warning btn-sm shadow-lg" type="submit" (click)="addTask()">NEW TASK</button>
 
-    <button #editTask style="width: 148px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">EDIT TASK</button>
+    <button #editTask class="btn btn-warning btn-sm shadow-lg">EDIT TASK</button>
 
-    <div class="container">
+</div>
 
-        <label for="newTask"></label>
-        <input #inputTask style="width: 315px; height: 50px; margin-top: 5px;" class="bg-warning shadow-lg" type="text" id="newTask"
-            placeholder="New task...">
+<div class="container">
 
-    </div>
+    <label for="newTask"></label>
+    <input #inputTask class="bg-warning shadow-lg" type="text" id="newTask" placeholder="New task...">
 
 </div>

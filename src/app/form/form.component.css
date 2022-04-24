@@ -1,11 +1,20 @@
 button {
     margin: 10px;
     border-radius: 10px;
-    width: 92px;
     font-family: 'digitalClock';
     font-size: 1.5em;
+    width: 148px; 
+    height: 50px;
 }
 
 div {
     text-align: center;
+}
+
+input{
+    width: 315px; 
+    height: 50px; 
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 0px;
 }
