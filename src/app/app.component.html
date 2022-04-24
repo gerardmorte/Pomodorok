@@ -5,13 +5,14 @@
     <br>
 
     <div class="container">
-
-        <button class="btn btn-warning btn-sm shadow-lg">Pomodoro</button>
-        <button class="btn btn-warning btn-sm shadow-lg">Statistics</button>
-        <button class="btn btn-warning btn-sm shadow-lg">Settings</button>
+            
+        <button class="btn btn-warning btn-sm shadow-lg" routerLink="">Pomodoro</button>
+        <button class="btn btn-warning btn-sm shadow-lg" routerLink="/statistics">Statistics</button>
+        <button class="btn btn-warning btn-sm shadow-lg" routerLink="/settings">Settings</button>
 
     </div>
 
-    <app-count-down></app-count-down>
+    <router-outlet></router-outlet>
 
 </body>
+
