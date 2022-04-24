@@ -10,8 +10,8 @@ import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
   { path: '', component: CountDownComponent },
-  { path: 'statistics', component: SettingsComponent },
-  { path: 'settings', component: StatisticsComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'statistics', component: StatisticsComponent },
 ];
 
 @NgModule({
