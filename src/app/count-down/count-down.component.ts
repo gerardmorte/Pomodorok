@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-count-down',
@@ -11,6 +12,11 @@ export class CountDownComponent implements OnInit {
   @ViewChild('stop') buttonStop: ElementRef;
   @ViewChild('longBreak15') longBreak15: ElementRef;
   @ViewChild('longBreak30') longBreak30: ElementRef;
+
+  @ViewChild(FormComponent) form: { statisticsArray: object};
+  pruebaEnviarArray: object;
+  @ViewChild(FormComponent) inputElement: {inputTask: ElementRef};
+  @ViewChild(FormComponent) buttonElement: {newTask: ElementRef};
 
   contador: any;
   setMinutes: number = 25;
@@ -34,6 +40,9 @@ export class CountDownComponent implements OnInit {
   ngAfterViewInit() {
     this.longBreak15.nativeElement.disabled = true;
     this.longBreak30.nativeElement.disabled = true;
+    //Prueba Enviar Array desde form.components.
+    this.pruebaEnviarArray = this.form.statisticsArray;
+    console.log(this.pruebaEnviarArray);
   }
 
 
@@ -118,9 +127,11 @@ export class CountDownComponent implements OnInit {
     } else if (!this.break) {
       this.shortBreak(5, 0);
       this.pauseCountDown(this.contador);
+      this.btnStart(5,0);
     } else {
       this.focusTime(25, 0);
       this.pauseCountDown(this.contador);
+      this.btnStart(25,0);
     }
   }
 
@@ -169,6 +180,9 @@ export class CountDownComponent implements OnInit {
     this.pauseCountDown(this.contador);
     this.buttonStop.nativeElement.disabled = false;
     console.log(this.finPomodoro);
+    this.inputElement.inputTask.nativeElement.disabled = false;
+    this.buttonElement.newTask.nativeElement.disabled = false;
+    //PLAYSOUND?
   }
 
 }
