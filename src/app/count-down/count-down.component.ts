@@ -9,9 +9,11 @@ import { FormComponent } from '../form/form.component';
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
+  @ViewChild('pause') buttonPause: ElementRef;
+  @ViewChild('next') buttonNext: ElementRef;
   @ViewChild('stop') buttonStop: ElementRef;
-  @ViewChild('longBreak15') longBreak15: ElementRef;
-  @ViewChild('longBreak30') longBreak30: ElementRef;
+  //@ViewChild('longBreak15') longBreak15: ElementRef;
+  //@ViewChild('longBreak30') longBreak30: ElementRef;
 
   @ViewChild(FormComponent) form: { statisticsArray: object };
   pruebaEnviarArray: object;
@@ -31,13 +33,19 @@ export class CountDownComponent implements OnInit {
   sendSeconds: number;
   break: boolean = false;
   contadorBreaks: number = 0;
-  finPomodoro: Date = new Date();
+  firstStart: boolean;
+  startPomodoro: Date;
+  finalPomodoro: Date;
 
   constructor() { }
 
   ngOnInit(): void { }
 
   ngAfterViewInit() {
+    this.buttonPause.nativeElement.disabled = true;
+    this.buttonNext.nativeElement.disabled = true;
+    this.buttonStop.nativeElement.disabled = true;
+
     //Prueba Enviar Array desde form.components.
     this.pruebaEnviarArray = this.form.statisticsArray;
     console.log(this.pruebaEnviarArray);
@@ -94,6 +102,15 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
+
+    if (!this.firstStart) {
+      this.buttonPause.nativeElement.disabled = false;
+      this.buttonNext.nativeElement.disabled = false;
+      this.buttonStop.nativeElement.disabled = false;
+      this.firstStart = true;
+      this.startPomodoro = new Date();
+    }
+
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
       this.buttonStart.nativeElement.disabled = true;
@@ -154,10 +171,21 @@ export class CountDownComponent implements OnInit {
     this.contadorBreaks = 0;
     this.focusTime(25, 0);
     this.pauseCountDown(this.contador);
-    this.buttonStop.nativeElement.disabled = false;
-    console.log(this.finPomodoro);
+    this.buttonPause.nativeElement.disabled = true;
+    this.buttonNext.nativeElement.disabled = true;
+    this.buttonStop.nativeElement.disabled = true;
+    //////////////
     this.inputElement.inputTask.nativeElement.disabled = false;
     this.buttonElement.newTask.nativeElement.disabled = false;
+    //////////////
+    this.finalPomodoro = new Date();
+    this.firstStart = false;
+    let totalMilliseconds = this.startPomodoro.getTime() - this.finalPomodoro.getTime();
+    let calculateMinutes = totalMilliseconds / 60000;
+    let calculateSeconds = totalMilliseconds / 1000;
+    let redondearMinutos = Math.round(Math.abs(calculateMinutes));
+    let redondearSegundos = Math.abs(calculateSeconds);
+    console.log(redondearMinutos + ":" + redondearSegundos);
     //PLAYSOUND?
   }
 

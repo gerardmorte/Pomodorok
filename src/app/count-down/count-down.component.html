@@ -8,13 +8,15 @@
 
 </div> -->
 
+<app-form></app-form>
+
 <div id="clockAndBtn" class="container">
 
     <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
 
     <button #start class="btn btn-warning btn-lg shadow-lg" (click)="btnStart(setMinutes, setSeconds)">START</button>
 
-    <button #stop class="btn btn-warning btn-lg shadow-lg" (click)="pauseCountDown(contador)">PAUSE</button>
+    <button #pause class="btn btn-warning btn-lg shadow-lg" (click)="pauseCountDown(contador)">PAUSE</button>
 
     <button #next class="btn btn-warning btn-lg shadow-lg" (click)="nextCountDown()">NEXT</button>
 
@@ -23,9 +25,8 @@
 
 <div class="container">
 
-    <button style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">STOP POMODORO</button>
+    <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">STOP POMODORO</button>
 
 </div>
 
-<app-form></app-form>
 
