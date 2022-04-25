@@ -13,10 +13,10 @@ export class CountDownComponent implements OnInit {
   @ViewChild('longBreak15') longBreak15: ElementRef;
   @ViewChild('longBreak30') longBreak30: ElementRef;
 
-  @ViewChild(FormComponent) form: { statisticsArray: object};
+  @ViewChild(FormComponent) form: { statisticsArray: object };
   pruebaEnviarArray: object;
-  @ViewChild(FormComponent) inputElement: {inputTask: ElementRef};
-  @ViewChild(FormComponent) buttonElement: {newTask: ElementRef};
+  @ViewChild(FormComponent) inputElement: { inputTask: ElementRef };
+  @ViewChild(FormComponent) buttonElement: { newTask: ElementRef };
 
   contador: any;
   setMinutes: number = 25;
@@ -38,8 +38,6 @@ export class CountDownComponent implements OnInit {
   ngOnInit(): void { }
 
   ngAfterViewInit() {
-    this.longBreak15.nativeElement.disabled = true;
-    this.longBreak30.nativeElement.disabled = true;
     //Prueba Enviar Array desde form.components.
     this.pruebaEnviarArray = this.form.statisticsArray;
     console.log(this.pruebaEnviarArray);
@@ -96,13 +94,6 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
-    this.longBreak15.nativeElement.id = "";
-    this.longBreak30.nativeElement.id = "";
-
-    if (this.buttonStop.nativeElement.disabled = true) {
-      this.buttonStop.nativeElement.disabled = false;
-    }
-
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
       this.countDown(min, sec);
       this.buttonStart.nativeElement.disabled = true;
@@ -114,24 +105,14 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
-    console.log(this.contadorBreaks);
-    this.pauseCountDown(this.contador);
+    clearInterval(this.contador);
+    this.buttonStart.nativeElement.disabled = true;
     if (this.contadorBreaks == 3 && !this.break) {
-      this.longBreak15.nativeElement.disabled = false;
-      this.longBreak30.nativeElement.disabled = false;
-      this.longBreak15.nativeElement.id = "flashingText";
-      this.longBreak30.nativeElement.id = "flashingText";
-      this.date.nativeElement.innerHTML = "00:00";
-      this.buttonStart.nativeElement.disabled = true;
-      this.buttonStop.nativeElement.disabled = true;
+      this.longBreak(50, 0);
     } else if (!this.break) {
       this.shortBreak(5, 0);
-      this.pauseCountDown(this.contador);
-      this.btnStart(5,0);
     } else {
       this.focusTime(25, 0);
-      this.pauseCountDown(this.contador);
-      this.btnStart(25,0);
     }
   }
 
@@ -141,8 +122,6 @@ export class CountDownComponent implements OnInit {
     this.countDown(this.setMinutes, this.setSeconds);
     this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
     this.break = false;
-    this.longBreak15.nativeElement.disabled = true;
-    this.longBreak30.nativeElement.disabled = true;
   }
 
   shortBreak(min: number, sec: number) {
@@ -161,9 +140,6 @@ export class CountDownComponent implements OnInit {
     this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
     this.break = true;
     this.contadorBreaks = 0;
-    this.pauseCountDown(this.contador);
-    this.longBreak15.nativeElement.disabled = true;
-    this.longBreak30.nativeElement.disabled = true;
   }
 
   playSound() {
