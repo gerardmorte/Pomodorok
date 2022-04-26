@@ -18,7 +18,8 @@ export class CountDownComponent implements OnInit {
   @ViewChild(FormComponent) form: { statisticsArray: object };
   pruebaEnviarArray: object;
   @ViewChild(FormComponent) inputElement: { inputTask: ElementRef };
-  @ViewChild(FormComponent) buttonElement: { newTask: ElementRef };
+  @ViewChild(FormComponent) saveElement: { saveTask: ElementRef };
+  @ViewChild(FormComponent) editElement: { editTask: ElementRef };
 
   contador: any;
   setMinutes: number = 25;
@@ -34,8 +35,12 @@ export class CountDownComponent implements OnInit {
   break: boolean = false;
   contadorBreaks: number = 0;
   firstStart: boolean;
-  startPomodoro: Date;
-  finalPomodoro: Date;
+
+  //Variables para contar el tiempo de bloque
+  totalMin: number = 0;
+  totalSec: number = 0;
+  auxTotalMin: number = this.totalMin;
+  auxTotalSec: number = this.totalSec;
 
   constructor() { }
 
@@ -91,10 +96,15 @@ export class CountDownComponent implements OnInit {
   pauseCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
-    let totalMinutes = this.initialMinutes - Number(this.textMinutes) - 1;
-    let totalSeconds = 60 - Number(this.textSeconds);
-    this.sendMinutes = totalMinutes;
-    this.sendSeconds = totalSeconds;
+    this.editElement.editTask.nativeElement.disabled = false;
+
+    this.totalMin, this.totalSec = 0;
+    this.totalMin = this.initialMinutes - Number(this.textMinutes) - 1;
+    this.totalSec = this.totalSec + 60 - parseInt(this.textSeconds);
+    this.totalMin = this.totalMin + this.auxTotalMin;
+    this.totalSec = this.totalSec + this.auxTotalSec;
+
+    console.log(this.totalMin + ":" + this.totalSec);
   }
 
   restartCountDown() {
@@ -102,13 +112,13 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
+    this.editElement.editTask.nativeElement.disabled = true;
 
     if (!this.firstStart) {
       this.buttonPause.nativeElement.disabled = false;
       this.buttonNext.nativeElement.disabled = false;
       this.buttonStop.nativeElement.disabled = false;
       this.firstStart = true;
-      this.startPomodoro = new Date();
     }
 
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
@@ -122,6 +132,9 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
+    this.auxTotalMin = this.totalMin;
+    this.auxTotalSec = this.totalSec;
+
     clearInterval(this.contador);
     this.buttonStart.nativeElement.disabled = true;
     if (this.contadorBreaks == 3 && !this.break) {
@@ -174,18 +187,13 @@ export class CountDownComponent implements OnInit {
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
-    //////////////
     this.inputElement.inputTask.nativeElement.disabled = false;
-    this.buttonElement.newTask.nativeElement.disabled = false;
-    //////////////
-    this.finalPomodoro = new Date();
+    this.saveElement.saveTask.nativeElement.disabled = false;
     this.firstStart = false;
-    let totalMilliseconds = this.startPomodoro.getTime() - this.finalPomodoro.getTime();
-    let calculateMinutes = totalMilliseconds / 60000;
-    let calculateSeconds = totalMilliseconds / 1000;
-    let redondearMinutos = Math.round(Math.abs(calculateMinutes));
-    let redondearSegundos = Math.abs(calculateSeconds);
-    console.log(redondearMinutos + ":" + redondearSegundos);
+    ////////////////
+    //NETEJAR TEMPS TOTAL DEL BLOC
+    this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
+    /////////////////
     //PLAYSOUND?
   }
 

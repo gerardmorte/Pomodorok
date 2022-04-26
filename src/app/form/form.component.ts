@@ -8,7 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class FormComponent implements OnInit {
 
   @ViewChild('inputTask') inputTask: ElementRef;
-  @ViewChild('newTask') newTask: ElementRef;
+  @ViewChild('saveTask') saveTask: ElementRef;
   @ViewChild('editTask') editTask: ElementRef;
 
   inputForm: string = "22:00"
@@ -17,16 +17,26 @@ export class FormComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
-  addTask() {
+   ngAfterViewInit() {
+    this.editTask.nativeElement.disabled = true;
+   }
+
+  save() {
     this.inputForm = this.inputTask.nativeElement.value;
     this.startPomodoro = new Date();
     let element = { inputForm: this.inputForm, startPomodoro: this.startPomodoro };
     this.statisticsArray.push(element);
     console.log(this.statisticsArray);
     this.inputTask.nativeElement.disabled = true;
-    this.newTask.nativeElement.disabled = true;
+    this.saveTask.nativeElement.disabled = true;
+    this.editTask.nativeElement.disabled = false;
+  }
+
+  edit(){ //Només es pot activar amb el comptador en PAUSA
+    this.inputTask.nativeElement.disabled = false;
+    this.saveTask.nativeElement.disabled = false;
     this.editTask.nativeElement.disabled = true;
   }
 }
