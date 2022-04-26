@@ -1,4 +1,22 @@
-<p *ngFor="let option of auxArray | keyvalue">
-    {{option.key}}{{option}}
-</p>
+<div class="container">
 
+    <table class="table bg-warning table-hover">
+        <thead>
+            <tr>
+                <!-- <th>ID</th> -->
+                <th scope="col">TASK</th>
+                <th scope="col">TIME</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let option of auxArray, let i = index">
+                <!-- <td>{{i+1}}</td> -->
+                <th scope="row">{{option.tareaBloque}}</th>
+                <td>{{option.tiempoBloque}} min/sec</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,18 @@
+table{
+    text-align: center;
+    font-family: 'digitalClock';
+    margin: 0px auto;
+    border-radius: 10px;   
+}
+
+th, td{
+    font-size: 1em;
+}
+
+button {
+    border-radius: 10px;
+    width: max-content;
+    font-size: 1em;
+    margin-top: 5px;
+}
+

@@ -54,7 +54,9 @@ export class CountDownComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getEstadisticas();
+  }
 
   ngAfterViewInit() {
     this.buttonPause.nativeElement.disabled = true;
@@ -205,7 +207,7 @@ export class CountDownComponent implements OnInit {
     this.inputElement.inputTask.nativeElement.value = "";
 
     //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
-    let elem = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
+    let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
     this.estadisticasArray.push(elem);
     this.localStorageEstadisticas(this.estadisticasArray);
     
@@ -216,5 +218,15 @@ export class CountDownComponent implements OnInit {
   //METODO GUARDAR DATOS EN LOCAL STORAGE
   localStorageEstadisticas(array: any){
     localStorage.setItem("localEstadisticas", JSON.stringify(array));
+  }
+
+  getEstadisticas() {
+    var storedList = localStorage.getItem("localEstadisticas");
+    if (storedList == null) {
+      let storedList = [];
+    } else {
+      this.estadisticasArray = JSON.parse(storedList);
+    }
+    return this.estadisticasArray;
   }
 }
