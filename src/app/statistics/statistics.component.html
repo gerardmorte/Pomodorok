@@ -4,19 +4,19 @@
         <thead>
             <tr>
                 <!-- <th>ID</th> -->
-                <th scope="col">TASK</th>
-                <th scope="col">TIME</th>
+                <th>TASK</th>
+                <th>MIN/SEC</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let option of auxArray, let i = index">
-                <!-- <td>{{i+1}}</td> -->
-                <th scope="row">{{option.tareaBloque}}</th>
-                <td>{{option.tiempoBloque}} min/sec</td>
+            <tr *ngFor="let option of auxArray">
+                <td id="infoTask">{{option.tareaBloque}}</td>
+                <td>{{option.tiempoBloque}}</td>
             </tr>
         </tbody>
 
     </table>
 
 </div>
+
