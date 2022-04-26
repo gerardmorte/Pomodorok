@@ -12,15 +12,15 @@ export class CountDownComponent implements OnInit {
   @ViewChild('pause') buttonPause: ElementRef;
   @ViewChild('next') buttonNext: ElementRef;
   @ViewChild('stop') buttonStop: ElementRef;
-  //@ViewChild('longBreak15') longBreak15: ElementRef;
-  //@ViewChild('longBreak30') longBreak30: ElementRef;
 
+  //ELEMENTS FROM FORM COMPONENT//
   @ViewChild(FormComponent) form: { statisticsArray: object };
   pruebaEnviarArray: object;
   @ViewChild(FormComponent) inputElement: { inputTask: ElementRef };
   @ViewChild(FormComponent) saveElement: { saveTask: ElementRef };
   @ViewChild(FormComponent) editElement: { editTask: ElementRef };
 
+  //VARIABLES ADMINISTRAR COUNTDOWN()
   contador: any;
   setMinutes: number = 25;
   setSeconds: number = 0;
@@ -30,17 +30,31 @@ export class CountDownComponent implements OnInit {
   seconds: number;
   textMinutes: string;
   textSeconds: string;
-  sendMinutes: number;
-  sendSeconds: number;
+
+  //VARIABLES MODIFICABLES DES DE SETTINGS?
+  focusMin: number;
+  focusSec: number;
+  shortBreakMin: number;
+  shortBreakSec: number;
+  longBreakMin: number;
+  longBreakSec: number;
+  //
   break: boolean = false;
   contadorBreaks: number = 0;
   firstStart: boolean;
-
+  //
   //Variables para contar el tiempo de bloque
   totalMin: number = 0;
   totalSec: number = 0;
   auxTotalMin: number = this.totalMin;
   auxTotalSec: number = this.totalSec;
+
+  //ARRAY A ENVIAR A STATISTICS
+  tiempoBloque: string = "";
+  tareaBloque: string = "";
+  estadisticasArray: any = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
+
+
 
   constructor() { }
 
@@ -191,9 +205,18 @@ export class CountDownComponent implements OnInit {
     this.saveElement.saveTask.nativeElement.disabled = false;
     this.firstStart = false;
     ////////////////
-    //NETEJAR TEMPS TOTAL DEL BLOC
+    //GUARDAR TEMPS TOTAL DEL BLOC
+    this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
+    this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
+    ////////////////
+    //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
+    this.inputElement.inputTask.nativeElement.value = "";
     /////////////////
+    //GUARDAR DADES AL ARRAY
+    let elem = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
+    this.estadisticasArray.push(elem);
+    console.log(this.estadisticasArray)
     //PLAYSOUND?
   }
 
