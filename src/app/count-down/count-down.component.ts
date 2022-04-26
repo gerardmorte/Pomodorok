@@ -52,9 +52,7 @@ export class CountDownComponent implements OnInit {
   //ARRAY A ENVIAR A STATISTICS
   tiempoBloque: string = "";
   tareaBloque: string = "";
-  estadisticasArray: any = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
-
-
+  estadisticasArray: any = [];
 
   constructor() { }
 
@@ -64,12 +62,7 @@ export class CountDownComponent implements OnInit {
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
-
-    //Prueba Enviar Array desde form.components.
-    this.pruebaEnviarArray = this.form.statisticsArray;
-    console.log(this.pruebaEnviarArray);
   }
-
 
   updateTime(i: string) {
     if (Number(i) < 10) {
@@ -204,20 +197,22 @@ export class CountDownComponent implements OnInit {
     this.inputElement.inputTask.nativeElement.disabled = false;
     this.saveElement.saveTask.nativeElement.disabled = false;
     this.firstStart = false;
-    ////////////////
+
     //GUARDAR TEMPS TOTAL DEL BLOC
     this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
     this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
-    ////////////////
+
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
     this.inputElement.inputTask.nativeElement.value = "";
-    /////////////////
+
     //GUARDAR DADES AL ARRAY
     let elem = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
     this.estadisticasArray.push(elem);
     console.log(this.estadisticasArray)
-    //PLAYSOUND?
+
+    //PLAYSOUND
+    this.playSound();
   }
 
 }
