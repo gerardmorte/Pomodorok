@@ -22,3 +22,8 @@ button {
     text-align: center;
     display: block;
 }
+
+@font-face {
+    font-family: "digitalClock";
+    src: url("src/assets/font/DS-DIGI.TTF") format("truetype");
+}

@@ -13,9 +13,7 @@ export class CountDownComponent implements OnInit {
   @ViewChild('next') buttonNext: ElementRef;
   @ViewChild('stop') buttonStop: ElementRef;
 
-  //ELEMENTS FROM FORM COMPONENT//
-  @ViewChild(FormComponent) form: { statisticsArray: object };
-  pruebaEnviarArray: object;
+  //ELEMENTS FROM FORM COMPONENT
   @ViewChild(FormComponent) inputElement: { inputTask: ElementRef };
   @ViewChild(FormComponent) saveElement: { saveTask: ElementRef };
   @ViewChild(FormComponent) editElement: { editTask: ElementRef };
@@ -206,13 +204,17 @@ export class CountDownComponent implements OnInit {
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
     this.inputElement.inputTask.nativeElement.value = "";
 
-    //GUARDAR DADES AL ARRAY
+    //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
     let elem = [{ tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque }];
     this.estadisticasArray.push(elem);
-    console.log(this.estadisticasArray)
-
+    this.localStorageEstadisticas(this.estadisticasArray);
+    
     //PLAYSOUND
     this.playSound();
   }
 
+  //METODO GUARDAR DATOS EN LOCAL STORAGE
+  localStorageEstadisticas(array: any){
+    localStorage.setItem("localEstadisticas", JSON.stringify(array));
+  }
 }
