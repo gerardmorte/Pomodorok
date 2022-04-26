@@ -1,9 +1,13 @@
 table {
     text-align: center;
     font-family: 'digitalClock';
-    margin: 0px auto;
     border-radius: 10px;
-    font-size: 1.5em;
+    font-size: 1.5em;   
+}
+
+.container{
+    overflow-y: scroll;
+    height: 550px;
 }
 
 th,
@@ -18,3 +22,16 @@ td {
         word-wrap: break-word;
     }
 }
+
+@media (max-width:810px) {
+
+    #infoTask {
+        max-width: 500px;
+        word-wrap: break-word;
+    }
+}
+
+/*EDIT SCROLL*/
+/* .scroll::-webkit-scrollbar-track {
+    background: orange;     
+} */

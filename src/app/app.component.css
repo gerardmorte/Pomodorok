@@ -29,11 +29,3 @@ button {
     src: url("src/assets/font/DS-DIGI.TTF") format("truetype");
 }
 
-
-@media (max-width:360px) {
-
-    body{
-        height: 100vh;
-        background-image: url(src/assets/img/wallpaper.jpg);
-    }
-}
