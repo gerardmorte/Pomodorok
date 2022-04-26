@@ -15,7 +15,7 @@ td {
     font-size: 1em;
 }
 
-@media (max-width:360px) {
+@media (min-width:360px) {
 
     #infoTask {
         max-width: 240px;
@@ -23,15 +23,25 @@ td {
     }
 }
 
-@media (max-width:810px) {
+/* @media (max-width:810px) {
 
     #infoTask {
         max-width: 500px;
         word-wrap: break-word;
     }
-}
+} */
 
 /*EDIT SCROLL*/
 /* .scroll::-webkit-scrollbar-track {
     background: orange;     
+} */
+
+/* table.scroll thead{
+    display: block;
+} */
+
+/* .container{
+scrollbar-color: red;
+scrollbar-arrow-color: blue;
+scrollbar-face-color: brown;
 } */
