@@ -15,7 +15,6 @@ td {
 
     #infoTask {
         max-width: 240px;
-        overflow: hidden;
-        white-space: pre-line;
+        word-wrap: break-word;
     }
 }
