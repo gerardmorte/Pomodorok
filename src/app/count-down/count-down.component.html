@@ -14,7 +14,7 @@
 
     <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
 
-    <button #start class="btn btn-warning btn-lg shadow-lg" (click)="btnStart(setMinutes, setSeconds)">START</button>
+    <button #start class="btn btn-warning btn-lg shadow-lg" (click)="btnStart(settingsArray[0], 0)">START</button>
 
     <button #pause class="btn btn-warning btn-lg shadow-lg" (click)="pauseCountDown(contador)">PAUSE</button>
 

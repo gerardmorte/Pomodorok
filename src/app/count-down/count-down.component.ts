@@ -20,20 +20,19 @@ export class CountDownComponent implements OnInit {
 
   //VARIABLES ADMINISTRAR COUNTDOWN()
   contador: any;
-  setMinutes: number = 25;
-  setSeconds: number = 0;
+  setMinutes: number;
+  setSeconds: number;
   initialMinutes: number;
   initialSeconds: number;
   minutes: number;
   seconds: number;
   textMinutes: string;
   textSeconds: string;
-
   //
   break: boolean = false;
   contadorBreaks: number = 0;
   firstStart: boolean;
-  
+
   //Variables para contar el tiempo de bloque
   totalMin: number = 0;
   totalSec: number = 0;
@@ -47,11 +46,6 @@ export class CountDownComponent implements OnInit {
 
   //ARRAY SETTINGS REBRE DADES
   settingsArray: any = [];
-
-  //VARIABLES MODIFICABLES DES DE SETTINGS?
-  focusMin: number = this.settingsArray[0];
-  shortBreakMin: number = this.settingsArray[1];
-  longBreakMin: number = this.settingsArray[2];
 
   constructor() { }
 
@@ -148,11 +142,11 @@ export class CountDownComponent implements OnInit {
     clearInterval(this.contador);
     this.buttonStart.nativeElement.disabled = true;
     if (this.contadorBreaks == 3 && !this.break) {
-      this.longBreak(50, 0);
+      this.longBreak(this.settingsArray[2], 0);
     } else if (!this.break) {
-      this.shortBreak(5, 0);
+      this.shortBreak(this.settingsArray[1], 0);
     } else {
-      this.focusTime(25, 0);
+      this.focusTime(this.settingsArray[0], 0);
     }
   }
 
@@ -160,7 +154,9 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+    this.textMinutes = this.updateTime(String(this.setMinutes));
+    this.textSeconds = this.updateTime(String(this.setSeconds));
+    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = false;
   }
 
@@ -168,7 +164,9 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.date.nativeElement.innerHTML = "0" + this.setMinutes + ':' + this.setSeconds + "0";
+    this.textMinutes = this.updateTime(String(this.setMinutes));
+    this.textSeconds = this.updateTime(String(this.setSeconds));
+    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = true;
     this.contadorBreaks++;
   }
@@ -177,7 +175,9 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.date.nativeElement.innerHTML = this.setMinutes + ':' + this.setSeconds + "0";
+    this.textMinutes = this.updateTime(String(this.setMinutes));
+    this.textSeconds = this.updateTime(String(this.setSeconds));
+    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = true;
     this.contadorBreaks = 0;
   }
@@ -213,13 +213,13 @@ export class CountDownComponent implements OnInit {
     let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
     this.estadisticasArray.push(elem);
     this.localStorageEstadisticas(this.estadisticasArray);
-    
+
     //PLAYSOUND
     this.playSound();
   }
 
   //METODO GUARDAR DATOS EN LOCAL STORAGE
-  localStorageEstadisticas(array: any){
+  localStorageEstadisticas(array: any) {
     localStorage.setItem("localEstadisticas", JSON.stringify(array));
   }
 
