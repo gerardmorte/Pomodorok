@@ -12,7 +12,13 @@
 
 <div id="clockAndBtn" class="container">
 
-    <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
+    <!-- <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1> -->
+
+    <h1 id="reloj" #reloj class="bg-warning shadow-lg" *ngIf="firstTimer; else defaultView">{{settingsArray[0]}}:00</h1>
+     
+      <ng-template #defaultView>
+            <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
+      </ng-template>
 
     <button #start class="btn btn-warning btn-lg shadow-lg" (click)="btnStart(settingsArray[0], 0)">START</button>
 

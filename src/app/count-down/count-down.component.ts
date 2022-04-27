@@ -47,6 +47,9 @@ export class CountDownComponent implements OnInit {
   //ARRAY SETTINGS REBRE DADES
   settingsArray: any = [];
 
+  //VISTA RELOJ CONTROLADOR
+  firstTimer: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
