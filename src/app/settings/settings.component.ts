@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSettings();
-    if (this.settings.length == 0 ) {
+    if (this.settings.length == 0) {
       this.range1Value = 25;
       this.range2Value = 5;
       this.range3Value = 15;
@@ -61,6 +61,15 @@ export class SettingsComponent implements OnInit {
   saveSettings() {
     this.settings = [this.range1Value, this.range2Value, this.range3Value]
     this.localStorageSettings(this.settings);
+  }
+
+  defaultSettings() {
+    this.range1Value = 25;
+    this.range2Value = 5;
+    this.range3Value = 15;
+    this.range1.nativeElement.value = this.range1Value;
+    this.range2.nativeElement.value = this.range2Value;
+    this.range3.nativeElement.value = this.range3Value;
   }
 
   deleteStatistics() {

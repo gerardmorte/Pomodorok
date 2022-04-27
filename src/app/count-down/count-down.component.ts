@@ -62,6 +62,12 @@ export class CountDownComponent implements OnInit {
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
+
+    //DESACTIVAR TOTS ELS BUTTONS QUAN S'ESTA EDITANT EL TASK
+    // if(this.saveElement.saveTask.nativeElement.disabled == false){
+    //   this.buttonStart.nativeElement.disabled = true;
+    // }
+    //
   }
 
   updateTime(i: string) {
@@ -142,7 +148,8 @@ export class CountDownComponent implements OnInit {
     this.auxTotalMin = this.totalMin;
     this.auxTotalSec = this.totalSec;
 
-    clearInterval(this.contador);
+    this.pauseCountDown(this.contador);
+
     this.buttonStart.nativeElement.disabled = true;
     if (this.contadorBreaks == 3 && !this.break) {
       this.longBreak(this.settingsArray[2], 0);
@@ -195,15 +202,7 @@ export class CountDownComponent implements OnInit {
   stopPomodoro() {
     this.pauseCountDown(this.contador);
     this.contadorBreaks = 0;
-    this.focusTime(25, 0);
-    this.pauseCountDown(this.contador);
-    this.buttonPause.nativeElement.disabled = true;
-    this.buttonNext.nativeElement.disabled = true;
-    this.buttonStop.nativeElement.disabled = true;
-    this.inputElement.inputTask.nativeElement.disabled = false;
-    this.saveElement.saveTask.nativeElement.disabled = false;
-    this.firstStart = false;
-
+    
     //GUARDAR TEMPS TOTAL DEL BLOC
     this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
     this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
@@ -216,6 +215,29 @@ export class CountDownComponent implements OnInit {
     let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
     this.estadisticasArray.push(elem);
     this.localStorageEstadisticas(this.estadisticasArray);
+
+
+    this.focusTime(this.settingsArray[0], 0);
+    this.pauseCountDown(this.contador);
+    this.buttonPause.nativeElement.disabled = true;
+    this.buttonNext.nativeElement.disabled = true;
+    this.buttonStop.nativeElement.disabled = true;
+    this.inputElement.inputTask.nativeElement.disabled = false;
+    this.saveElement.saveTask.nativeElement.disabled = false;
+    this.firstStart = false;
+
+    // //GUARDAR TEMPS TOTAL DEL BLOC
+    // this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
+    // this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
+
+    // //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
+    // this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
+    // this.inputElement.inputTask.nativeElement.value = "";
+
+    // //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
+    // let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
+    // this.estadisticasArray.push(elem);
+    // this.localStorageEstadisticas(this.estadisticasArray);
 
     //PLAYSOUND
     this.playSound();
