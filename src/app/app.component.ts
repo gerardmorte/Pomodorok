@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CountDownComponent } from './count-down/count-down.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pomodoro-Web-App';
+
+  //PRUEBA IMPORTAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
+  constructor() { 
+    console.log(CountDownComponent.startStatus);
+  }
 }
