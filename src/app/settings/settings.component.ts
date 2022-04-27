@@ -21,7 +21,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSettings();
-    console.log(this.getSettings);
     if (this.settings.length == 0 ) {
       this.range1Value = 25;
       this.range2Value = 5;

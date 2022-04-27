@@ -29,18 +29,11 @@ export class CountDownComponent implements OnInit {
   textMinutes: string;
   textSeconds: string;
 
-  //VARIABLES MODIFICABLES DES DE SETTINGS?
-  focusMin: number;
-  focusSec: number;
-  shortBreakMin: number;
-  shortBreakSec: number;
-  longBreakMin: number;
-  longBreakSec: number;
   //
   break: boolean = false;
   contadorBreaks: number = 0;
   firstStart: boolean;
-  //
+  
   //Variables para contar el tiempo de bloque
   totalMin: number = 0;
   totalSec: number = 0;
@@ -52,10 +45,20 @@ export class CountDownComponent implements OnInit {
   tareaBloque: string = "";
   estadisticasArray: any = [];
 
+  //ARRAY SETTINGS REBRE DADES
+  settingsArray: any = [];
+
+  //VARIABLES MODIFICABLES DES DE SETTINGS?
+  focusMin: number = this.settingsArray[0];
+  shortBreakMin: number = this.settingsArray[1];
+  longBreakMin: number = this.settingsArray[2];
+
   constructor() { }
 
   ngOnInit(): void {
     this.getEstadisticas();
+    this.getSettings();
+    console.log(this.settingsArray);
   }
 
   ngAfterViewInit() {
@@ -228,5 +231,15 @@ export class CountDownComponent implements OnInit {
       this.estadisticasArray = JSON.parse(storedList);
     }
     return this.estadisticasArray;
+  }
+
+  getSettings() {
+    var storedList = localStorage.getItem("localSettings");
+    if (storedList == null) {
+      let storedList = [];
+    } else {
+      this.settingsArray = JSON.parse(storedList);
+    }
+    return this.settingsArray;
   }
 }

@@ -16,8 +16,6 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEstadisticas();
-    console.log(this.auxArray);
-      
   }
 
   ngAfterViewInit() {
