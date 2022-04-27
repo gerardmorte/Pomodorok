@@ -1,51 +1,51 @@
-<div class="container settings">
+<div class="container">
 
-    <button style="width: 200px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">LONG
-        BREAK</button>
+    <button class="bg-warning rangeInfo">Focus Time</button>
+    <button class="bg-warning rangeInfo">{{range1Value}}'</button>
 
 </div>
 
 <div class="container">
 
-    <button style="width: 148px; height: 50px;" #longBreak15 class="btn btn-warning btn-sm shadow-lg">15'</button>
-
-    <button style="width: 148px; height: 50px;" #longBreak30 class="btn btn-warning btn-lg shadow-lg">30'</button>
-
-</div>
-
-<div class="container">
-
+    <label for="customRange1" class="form-label bg-warning"></label>
+    <input #range1 type="range" class="form-range" min="0" max="60" step="5" id="customRange1" style="width: 300px;" value="25" (change)="getValueFromRange1()">
     <hr>
+
+</div>
+
+<div class="container">
+
+    <button class="bg-warning rangeInfo">Short Break</button>
+    <button class="bg-warning rangeInfo">{{range2Value}}'</button>
+
+</div>
+
+<div class="container">
+
+    <label for="customRange2" class="form-label bg-warning"></label>
+    <input #range2 type="range" class="form-range" min="0" max="30" step="5" id="customRange1" style="width: 300px;" value="5" (change)="getValueFromRange2()">
+    <hr>
+
+</div>
+
+<div class="container">
+
+    <button class="bg-warning rangeInfo">Long Break</button>
+    <button class="bg-warning rangeInfo">{{range3Value}}'</button>
+
+</div>
+
+<div class="container">
+
+    <label for="customRange3" class="form-label bg-warning"></label>
+    <input #range3 type="range" class="form-range" min="0" max="30" step="5" id="customRange" style="width: 300px;" value="15" (change)="getValueFromRange3()">
+    <hr>
+
+</div>
+
+<div class="container">
 
     <button style="width: 250px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">DELETE STATISTICS</button>
 
 </div>
 
-<!-- <div class="container">
-
-    <button style="width: 200px; height: 50px;" #longBreak15 class="btn btn-warning btn-sm shadow-lg">FOCUS</button>
-
-    <button style="width: 148px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">25'</button>
-
-    <button style="width: 148px; height: 50px;" class="btn btn-warning btn-lg shadow-lg">40'</button>
-
-    <button style="width: 148px; height: 50px;" class="btn btn-warning btn-lg shadow-lg">+</button>
-
-    <button style="width: 148px; height: 50px;" class="btn btn-warning btn-lg shadow-lg">-</button>
-
-
-</div> -->
-
-<!-- <div class="container">
-
-    <button style="width: 200px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">LIGHT MODE</button>
-
-    <button style="width: 200px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">DARK MODE</button>
-
-</div>
-
-<div class="container">
-
-    <button style="width: 300px; height: 50px;" class="btn btn-warning btn-sm shadow-lg">DEFAULT SETTINGS</button>
-    
-</div> -->
