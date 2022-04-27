@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CountDownComponent } from '../count-down/count-down.component';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+// import { CountDownComponent } from '../count-down/count-down.component';
 
 @Component({
   selector: 'app-statistics',
@@ -8,7 +8,8 @@ import { CountDownComponent } from '../count-down/count-down.component';
 })
 export class StatisticsComponent implements OnInit {
 
-  //@ViewChild(CountDownComponent) array: { estadisticasArray: object};
+  @ViewChild('container1') container1: ElementRef;
+
   auxArray: any = [];
 
   constructor() { }
@@ -16,6 +17,12 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.getEstadisticas();
     console.log(this.auxArray);
+      
+  }
+
+  ngAfterViewInit() {
+    if(this.container1.nativeElement.offsetHeight == 550)
+    this.container1.nativeElement.style.overflowY = "scroll";
   }
 
   //OBTENER DATOS LOCAL STORAGE

@@ -6,7 +6,6 @@ table {
 }
 
 .container{
-    overflow-y: scroll;
     max-height: 550px;
 }
 
@@ -22,26 +21,3 @@ td {
         word-wrap: break-word;
     }
 }
-
-/* @media (max-width:810px) {
-
-    #infoTask {
-        max-width: 500px;
-        word-wrap: break-word;
-    }
-} */
-
-/*EDIT SCROLL*/
-/* .scroll::-webkit-scrollbar-track {
-    background: orange;     
-} */
-
-/* table.scroll thead{
-    display: block;
-} */
-
-/* .container{
-scrollbar-color: red;
-scrollbar-arrow-color: blue;
-scrollbar-face-color: brown;
-} */
