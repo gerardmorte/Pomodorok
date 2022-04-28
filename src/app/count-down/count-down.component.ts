@@ -100,12 +100,15 @@ export class CountDownComponent implements OnInit {
       this.textSeconds = this.updateTime(this.textSeconds);
       this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
 
-      if (this.minutes == 0 && this.seconds == 0) {
+      if (this.textMinutes == "00" && this.textSeconds == "00") {
         this.playSound();
-        this.pauseCountDown(this.contador);
+        //this.pauseCountDown(this.contador);
+        clearInterval(this.contador);
         this.nextCountDown();
       }
       this.seconds--;
+      console.log(this.seconds);
+      console.log(this.minutes);
 
     }, 1000);
 
@@ -211,22 +214,25 @@ export class CountDownComponent implements OnInit {
 
   stopPomodoro() {
     this.pauseCountDown(this.contador);
+    //clearInterval(this.contador);
     this.contadorBreaks = 0;
     
     //GUARDAR TEMPS TOTAL DEL BLOC
-    this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
+    let calcMinutes = Math.round(this.totalSec / 60);
+    let calcSeconds = Math.round(this.totalSec - (calcMinutes * 60));
+    this.tiempoBloque = this.updateTime(String(calcMinutes)) + ":" + this.updateTime(String(calcSeconds));
     this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
 
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
     this.inputElement.inputTask.nativeElement.value = "";
-
+    
     //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
     let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
     this.estadisticasArray.push(elem);
     this.localStorageEstadisticas(this.estadisticasArray);
 
-
+    //REINICIAR COUNTDOWN Y BUTTONS ESTIL D'INICI
     this.focusTime(this.settingsArray[0], 0);
     this.pauseCountDown(this.contador);
     this.buttonPause.nativeElement.disabled = true;
@@ -235,19 +241,6 @@ export class CountDownComponent implements OnInit {
     this.inputElement.inputTask.nativeElement.disabled = false;
     this.saveElement.saveTask.nativeElement.disabled = false;
     this.firstStart = false;
-
-    // //GUARDAR TEMPS TOTAL DEL BLOC
-    // this.tiempoBloque = String(this.totalMin) + ":" + String(this.totalSec);
-    // this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
-
-    // //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
-    // this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
-    // this.inputElement.inputTask.nativeElement.value = "";
-
-    // //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
-    // let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
-    // this.estadisticasArray.push(elem);
-    // this.localStorageEstadisticas(this.estadisticasArray);
 
     //PLAYSOUND
     this.playSound();
