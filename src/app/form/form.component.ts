@@ -23,10 +23,6 @@ export class FormComponent implements OnInit {
 
   save() {
     this.inputForm = this.inputTask.nativeElement.value;
-    //this.startPomodoro = new Date();
-    //let element = { inputForm: this.inputForm, startPomodoro: this.startPomodoro };
-    //this.statisticsArray.push(element);
-    //console.log(this.statisticsArray);
     this.inputTask.nativeElement.disabled = true;
     this.saveTask.nativeElement.disabled = true;
     this.editTask.nativeElement.disabled = false;
