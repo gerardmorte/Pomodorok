@@ -50,16 +50,10 @@ export class CountDownComponent implements OnInit {
   //VISTA RELOJ CONTROLADOR
   firstTimer: boolean = true;
 
-  //PRUEBA EXPORTAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
-  static startStatus: string = "false";
-  //
-
   //PRUEBA SUMAR TIEMPOS:
   sumaMinutos: number = 0;
   sumaSegundos: number = 0;
   auxSumaSegundos: number = 0;
-
-  constructor() { }
 
   ngOnInit(): void {
     this.getEstadisticas();
@@ -142,11 +136,6 @@ export class CountDownComponent implements OnInit {
       this.buttonNext.nativeElement.disabled = false;
       this.buttonStop.nativeElement.disabled = false;
       this.firstStart = true;
-
-      //PRUEBA MODIFICAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
-      CountDownComponent.startStatus = "Pepe";
-      console.log(CountDownComponent.startStatus);
-      //
     }
 
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
