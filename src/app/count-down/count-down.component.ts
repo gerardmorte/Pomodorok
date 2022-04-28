@@ -134,6 +134,7 @@ export class CountDownComponent implements OnInit {
 
   btnStart(min: number, sec: number) {
     this.editElement.editTask.nativeElement.disabled = true;
+    this.saveElement.saveTask.nativeElement.disabled = true;
 
     if (!this.firstStart) {
       this.buttonPause.nativeElement.disabled = false;
