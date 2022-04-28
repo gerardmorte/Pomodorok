@@ -94,12 +94,12 @@ export class CountDownComponent implements OnInit {
     this.seconds = this.initialSeconds;
 
     this.contador = setInterval(() => {
-      let fecha = new Date();
-      fecha.setMinutes(this.minutes);
-      fecha.setSeconds(this.seconds);
+      let reloj = new Date();
+      reloj.setMinutes(this.minutes);
+      reloj.setSeconds(this.seconds);
 
-      this.textMinutes = String(fecha.getMinutes());
-      this.textSeconds = String(fecha.getSeconds());
+      this.textMinutes = String(reloj.getMinutes());
+      this.textSeconds = String(reloj.getSeconds());
 
       this.textMinutes = this.updateTime(this.textMinutes);
       this.textSeconds = this.updateTime(this.textSeconds);
@@ -107,20 +107,16 @@ export class CountDownComponent implements OnInit {
 
       if (this.textMinutes == "00" && this.textSeconds == "00") {
         this.playSound();
-        //this.pauseCountDown(this.contador);
-        clearInterval(this.contador);
         this.nextCountDown();
       }
 
       this.seconds--;
 
-      if(this.seconds == -60){
+      if (this.seconds == -60) {
         this.sumaMinutos++;
       }
 
       this.sumaSegundos = Math.abs(this.seconds) - 1;
-
-      console.log(this.sumaMinutos + ":" + this.sumaSegundos);
 
     }, 1000);
 
@@ -164,10 +160,8 @@ export class CountDownComponent implements OnInit {
   nextCountDown() {
     this.auxSumaSegundos += this.sumaSegundos;
 
+    clearInterval(this.contador);
 
-    this.pauseCountDown(this.contador);
-
-    this.buttonStart.nativeElement.disabled = true;
     if (this.contadorBreaks == 3 && !this.break) {
       this.longBreak(this.settingsArray[2], 0);
     } else if (!this.break) {
@@ -181,9 +175,6 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.textMinutes = this.updateTime(String(this.setMinutes));
-    this.textSeconds = this.updateTime(String(this.setSeconds));
-    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = false;
   }
 
@@ -191,9 +182,6 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.textMinutes = this.updateTime(String(this.setMinutes));
-    this.textSeconds = this.updateTime(String(this.setSeconds));
-    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = true;
     this.contadorBreaks++;
   }
@@ -202,9 +190,6 @@ export class CountDownComponent implements OnInit {
     this.setMinutes = min;
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
-    this.textMinutes = this.updateTime(String(this.setMinutes));
-    this.textSeconds = this.updateTime(String(this.setSeconds));
-    this.date.nativeElement.innerHTML = this.textMinutes + ':' + this.textSeconds;
     this.break = true;
     this.contadorBreaks = 0;
   }
@@ -255,6 +240,7 @@ export class CountDownComponent implements OnInit {
     localStorage.setItem("localEstadisticas", JSON.stringify(array));
   }
 
+  //OBTENER DATOS ESTADISTICAS LOCAL STORAGE PARA RELLENAR ARRAY CON NUEVAS TASK
   getEstadisticas() {
     var storedList = localStorage.getItem("localEstadisticas");
     if (storedList == null) {
@@ -265,6 +251,7 @@ export class CountDownComponent implements OnInit {
     return this.estadisticasArray;
   }
 
+  //OBTENER DATOS SETTINGS LOCAL STORAGE
   getSettings() {
     var storedList = localStorage.getItem("localSettings");
     if (storedList == null) {
@@ -273,13 +260,6 @@ export class CountDownComponent implements OnInit {
       this.settingsArray = JSON.parse(storedList);
     }
     return this.settingsArray;
-  }
-
-  calcTotalTime() {
-    if(this.minutes == -60){
-      this.sumaMinutos++;
-    }
-    
   }
 
 }
