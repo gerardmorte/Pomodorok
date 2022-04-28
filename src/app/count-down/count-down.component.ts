@@ -156,6 +156,7 @@ export class CountDownComponent implements OnInit {
       this.restartCountDown();
       this.buttonStart.nativeElement.disabled = true;
     }
+
   }
 
   nextCountDown() {
