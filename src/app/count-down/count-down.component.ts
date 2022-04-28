@@ -54,13 +54,18 @@ export class CountDownComponent implements OnInit {
   static startStatus: string = "false";
   //
 
+  //PRUEBA SUMAR TIEMPOS:
+  sumaMinutos: number = 0;
+  sumaSegundos: number = 0;
+  auxSumaSegundos: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
     this.getEstadisticas();
     this.getSettings();
     console.log(this.settingsArray);
-     //EXPORTAR BOOLEAN BOTON START
+    //EXPORTAR BOOLEAN BOTON START
   }
 
   ngAfterViewInit() {
@@ -106,9 +111,16 @@ export class CountDownComponent implements OnInit {
         clearInterval(this.contador);
         this.nextCountDown();
       }
+
       this.seconds--;
-      console.log(this.seconds);
-      console.log(this.minutes);
+
+      if(this.seconds == -60){
+        this.sumaMinutos++;
+      }
+
+      this.sumaSegundos = Math.abs(this.seconds) - 1;
+
+      console.log(this.sumaMinutos + ":" + this.sumaSegundos);
 
     }, 1000);
 
@@ -118,14 +130,6 @@ export class CountDownComponent implements OnInit {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
     this.editElement.editTask.nativeElement.disabled = false;
-
-    this.totalMin, this.totalSec = 0;
-    this.totalMin = this.initialMinutes - Number(this.textMinutes) - 1;
-    this.totalSec = this.totalSec + 60 - parseInt(this.textSeconds);
-    this.totalMin = this.totalMin + this.auxTotalMin;
-    this.totalSec = this.totalSec + this.auxTotalSec;
-
-    console.log(this.totalMin + ":" + this.totalSec);
   }
 
   restartCountDown() {
@@ -158,8 +162,8 @@ export class CountDownComponent implements OnInit {
   }
 
   nextCountDown() {
-    this.auxTotalMin = this.totalMin;
-    this.auxTotalSec = this.totalSec;
+    this.auxSumaSegundos += this.sumaSegundos;
+
 
     this.pauseCountDown(this.contador);
 
@@ -214,19 +218,19 @@ export class CountDownComponent implements OnInit {
 
   stopPomodoro() {
     this.pauseCountDown(this.contador);
-    //clearInterval(this.contador);
+
     this.contadorBreaks = 0;
-    
+    this.auxSumaSegundos += this.sumaSegundos;
+
     //GUARDAR TEMPS TOTAL DEL BLOC
-    let calcMinutes = Math.round(this.totalSec / 60);
-    let calcSeconds = Math.round(this.totalSec - (calcMinutes * 60));
-    this.tiempoBloque = this.updateTime(String(calcMinutes)) + ":" + this.updateTime(String(calcSeconds));
+    let ajustarSegundos = this.auxSumaSegundos - (this.sumaMinutos * 60);
+    this.tiempoBloque = this.updateTime(String(this.sumaMinutos)) + ":" + this.updateTime(String(ajustarSegundos));
     this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
 
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
     this.inputElement.inputTask.nativeElement.value = "";
-    
+
     //GUARDAR DADES AL ARRAY (AFEGIR ID??? PER BORRAR REGISTRES...? O FER-HO PER TRIATGE OBTENIT EL VALUE)
     let elem = { tiempoBloque: this.tiempoBloque, tareaBloque: this.tareaBloque };
     this.estadisticasArray.push(elem);
@@ -270,4 +274,12 @@ export class CountDownComponent implements OnInit {
     }
     return this.settingsArray;
   }
+
+  calcTotalTime() {
+    if(this.minutes == -60){
+      this.sumaMinutos++;
+    }
+    
+  }
+
 }
