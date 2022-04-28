@@ -19,7 +19,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if(this.container1.nativeElement.offsetHeight == 550)
+    if(this.container1.nativeElement.offsetHeight == 400)
     this.container1.nativeElement.style.overflowY = "scroll";
   }
 

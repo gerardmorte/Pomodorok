@@ -1,12 +1,16 @@
 table {
-    text-align: center;
+    text-align: justify;
     font-family: 'digitalClock';
     border-radius: 10px;
     font-size: 1.5em;   
 }
 
+.infoTime{
+    text-align: center;
+}
+
 .container{
-    max-height: 550px;
+    max-height: 400px;
 }
 
 th,

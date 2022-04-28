@@ -2,15 +2,15 @@
     <table class="table bg-warning table-hover">
         <thead>
             <tr>
-                <th>TASK</th>
-                <th>MIN/SEC</th>
+                <th>- DATE/TASK -</th>
+                <th class="infoTime">- MIN/SEC -</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let option of auxArray">
                 <td id="infoTask">{{option.tareaBloque}}</td>
-                <td>{{option.tiempoBloque}}</td>
+                <td class="infoTime">{{option.tiempoBloque}}</td>
             </tr>
         </tbody>
 

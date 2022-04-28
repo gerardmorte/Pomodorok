@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subscriber } from 'rxjs';
 import { FormComponent } from '../form/form.component';
 
 @Component({
@@ -6,6 +7,7 @@ import { FormComponent } from '../form/form.component';
   templateUrl: './count-down.component.html',
   styleUrls: ['./count-down.component.css'],
 })
+
 export class CountDownComponent implements OnInit {
   @ViewChild('reloj') date: ElementRef;
   @ViewChild('start') buttonStart: ElementRef;
@@ -31,7 +33,9 @@ export class CountDownComponent implements OnInit {
   //
   break: boolean = false;
   contadorBreaks: number = 0;
+  contadorFocus: number = 1;
   firstStart: boolean;
+  static auxFirstStart: string = "";
 
   //Variables para contar el tiempo de bloque
   totalMin: number = 0;
@@ -58,20 +62,12 @@ export class CountDownComponent implements OnInit {
   ngOnInit(): void {
     this.getEstadisticas();
     this.getSettings();
-    console.log(this.settingsArray);
-    //EXPORTAR BOOLEAN BOTON START
   }
 
   ngAfterViewInit() {
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
-
-    //DESACTIVAR TOTS ELS BUTTONS QUAN S'ESTA EDITANT EL TASK
-    // if(this.saveElement.saveTask.nativeElement.disabled == false){
-    //   this.buttonStart.nativeElement.disabled = true;
-    // }
-    //
   }
 
   updateTime(i: string) {
@@ -147,6 +143,8 @@ export class CountDownComponent implements OnInit {
       this.buttonStart.nativeElement.disabled = true;
     }
 
+    CountDownComponent.auxFirstStart = "disabled";
+
   }
 
   nextCountDown() {
@@ -168,6 +166,12 @@ export class CountDownComponent implements OnInit {
     this.setSeconds = sec;
     this.countDown(this.setMinutes, this.setSeconds);
     this.break = false;
+
+    if(this.contadorFocus == 4){
+      this.contadorFocus = 1;
+    }else{
+    this.contadorFocus++;
+    }
   }
 
   shortBreak(min: number, sec: number) {
@@ -194,15 +198,20 @@ export class CountDownComponent implements OnInit {
   }
 
   stopPomodoro() {
+
+    CountDownComponent.auxFirstStart = "";
+
     this.pauseCountDown(this.contador);
 
     this.contadorBreaks = 0;
+    this.contadorFocus = 0;
     this.auxSumaSegundos += this.sumaSegundos;
 
     //GUARDAR TEMPS TOTAL DEL BLOC
+    let taskDay = new Date();
     let ajustarSegundos = this.auxSumaSegundos - (this.sumaMinutos * 60);
     this.tiempoBloque = this.updateTime(String(this.sumaMinutos)) + ":" + this.updateTime(String(ajustarSegundos));
-    this.tareaBloque = this.inputElement.inputTask.nativeElement.value;
+    this.tareaBloque = taskDay.getDate() + "-" + this.updateTime(String(taskDay.getMonth() + 1)) + " / " + this.inputElement.inputTask.nativeElement.value;
 
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
@@ -255,3 +264,10 @@ export class CountDownComponent implements OnInit {
   }
 
 }
+
+export const observable = new Observable(Subscriber => {
+  setInterval(function(){
+    Subscriber.next(CountDownComponent.auxFirstStart);
+
+  },1000);
+})

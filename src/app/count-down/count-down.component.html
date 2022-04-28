@@ -13,7 +13,7 @@
 <div id="clockAndBtn" class="container">
 
     <!-- <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1> -->
-
+    
     <h1 id="reloj" #reloj class="bg-warning shadow-lg" *ngIf="firstTimer; else defaultView">{{settingsArray[0]}}:00</h1>
      
       <ng-template #defaultView>
@@ -26,13 +26,19 @@
 
     <button #next class="btn btn-warning btn-lg shadow-lg" (click)="nextCountDown()">NEXT</button>
 
+</div>
+
+<div class="container">
+
+    <button id="infoBlocks"class="btn btn-warning btn-lg shadow-lg">{{contadorFocus}}/4</button>
 
 </div>
 
 <div class="container">
 
-    <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">STOP POMODORO</button>
+    <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">FINISH POMODORO</button>
 
 </div>
+
 
 

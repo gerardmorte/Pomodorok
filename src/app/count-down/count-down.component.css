@@ -6,6 +6,12 @@ h1 {
     padding: 20px;
 }
 
+#infoBlocks{
+    pointer-events: none;
+    width: 318px;
+    margin-top: 3px;
+}
+
 button {
     margin: 10px;
     border-radius: 10px;
