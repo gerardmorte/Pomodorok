@@ -50,26 +50,34 @@ export class CountDownComponent implements OnInit {
   //VISTA RELOJ CONTROLADOR
   firstTimer: boolean = true;
 
+  //PRUEBA EXPORTAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
+  static startStatus: string = "false";
+  //
+
   //PRUEBA SUMAR TIEMPOS:
   sumaMinutos: number = 0;
   sumaSegundos: number = 0;
   auxSumaSegundos: number = 0;
-
-  //DESACTIVAR SAVE TASK SI NO SE HA INTRODUCIDO NADA Y LE DAS A START
-  formStatus: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
     this.getEstadisticas();
     this.getSettings();
+    console.log(this.settingsArray);
+    //EXPORTAR BOOLEAN BOTON START
   }
 
   ngAfterViewInit() {
-    //this.buttonStart.nativeElement.disabled = true;
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
+
+    //DESACTIVAR TOTS ELS BUTTONS QUAN S'ESTA EDITANT EL TASK
+    // if(this.saveElement.saveTask.nativeElement.disabled == false){
+    //   this.buttonStart.nativeElement.disabled = true;
+    // }
+    //
   }
 
   updateTime(i: string) {
@@ -117,7 +125,6 @@ export class CountDownComponent implements OnInit {
   pauseCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
-    this.saveElement.saveTask.nativeElement.disabled = false;
     this.editElement.editTask.nativeElement.disabled = false;
   }
 
@@ -126,11 +133,18 @@ export class CountDownComponent implements OnInit {
   }
 
   btnStart(min: number, sec: number) {
+    this.editElement.editTask.nativeElement.disabled = true;
+
     if (!this.firstStart) {
       this.buttonPause.nativeElement.disabled = false;
       this.buttonNext.nativeElement.disabled = false;
       this.buttonStop.nativeElement.disabled = false;
       this.firstStart = true;
+
+      //PRUEBA MODIFICAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
+      CountDownComponent.startStatus = "Pepe";
+      console.log(CountDownComponent.startStatus);
+      //
     }
 
     if (this.minutes == this.initialMinutes && this.seconds == this.initialSeconds) {
@@ -141,15 +155,6 @@ export class CountDownComponent implements OnInit {
       this.restartCountDown();
       this.buttonStart.nativeElement.disabled = true;
     }
-
-    if(this.formStatus == true){
-      this.saveElement.saveTask.nativeElement.disabled = true;
-      this.inputElement.inputTask.nativeElement.disabled = true;
-      this.formStatus = false;
-    }
-
-    this.editElement.editTask.nativeElement.disabled = true;
-
   }
 
   nextCountDown() {

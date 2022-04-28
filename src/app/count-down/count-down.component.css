@@ -12,7 +12,6 @@ button {
     width: 92px;
     font-family: 'digitalClock';
     font-size: 1.5em;
-    margin-top: 15px;
 }
 
 #clockAndBtn{
@@ -25,15 +24,7 @@ button {
     height: auto;
     margin: 0px auto;
     border-radius: 15px;
-    font-family: 'digitalClock';
-}
-
-#clockAndBtn{
-    margin-top: 10px;
-}
-
-#stopDiv{
-    margin-top: 10px;
+    font-family: 'digitalClock'
 }
 
 /*@font-face {

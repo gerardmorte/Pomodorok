@@ -1,6 +1,18 @@
+<!-- <div class="container">
+
+    <button style="width: 148px; height: 90px;" #longBreak15 class="btn btn-warning btn-sm shadow-lg"
+        (click)="longBreak(15,0)">15' LONG BREAK</button>
+
+    <button style="width: 148px; height: 90x;" #longBreak30 class="btn btn-warning btn-lg shadow-lg"
+        (click)="longBreak(30,0)">30' LONG BREAK</button>
+
+</div> -->
+
 <app-form></app-form>
 
 <div id="clockAndBtn" class="container">
+
+    <!-- <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1> -->
 
     <h1 id="reloj" #reloj class="bg-warning shadow-lg" *ngIf="firstTimer; else defaultView">{{settingsArray[0]}}:00</h1>
      
@@ -17,7 +29,7 @@
 
 </div>
 
-<div id="stopDiv" class="container">
+<div class="container">
 
     <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">STOP POMODORO</button>
 

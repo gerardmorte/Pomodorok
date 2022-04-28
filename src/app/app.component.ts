@@ -8,4 +8,9 @@ import { CountDownComponent } from './count-down/count-down.component';
 })
 export class AppComponent {
   title = 'Pomodoro-Web-App';
+
+  //PRUEBA IMPORTAR VARIABLE PARA SABER ESTADO DE BOTON START I DESHABILITAR O HABILITAR MENU.
+  constructor() { 
+    console.log(CountDownComponent.startStatus);
+  }
 }
