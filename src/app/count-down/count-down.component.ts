@@ -56,10 +56,8 @@ export class CountDownComponent implements OnInit {
   firstTimer: boolean = true;
 
   //PRUEBA SUMAR TIEMPOS:
-  sumaMinutos: number = 0;
   sumaSegundos: number = 0;
   auxSumaSegundos: number = 0;
-  auxSumaMinutos: number = 0;
 
   ngOnInit(): void {
     this.getEstadisticas();
@@ -104,13 +102,7 @@ export class CountDownComponent implements OnInit {
 
       this.seconds--;
 
-      if (this.seconds % -60 == 0) {
-        this.sumaMinutos++;
-      }
-
       this.sumaSegundos = Math.abs(this.seconds) - 1;
-
-      console.log(this.sumaMinutos + ":" + this.sumaSegundos)
 
     }, 1000);
 
@@ -154,8 +146,6 @@ export class CountDownComponent implements OnInit {
   nextCountDown() {
     this.auxSumaSegundos += this.sumaSegundos;
     this.sumaSegundos = 0;
-    this.auxSumaMinutos += this.sumaMinutos;
-    this.sumaMinutos = 0;
 
     clearInterval(this.contador);
 
@@ -205,9 +195,7 @@ export class CountDownComponent implements OnInit {
   }
 
   stopPomodoro() {
-
     this.auxSumaSegundos += this.sumaSegundos;
-    this.auxSumaMinutos += this.sumaMinutos
 
     CountDownComponent.auxFirstStart = "";
 
@@ -217,15 +205,9 @@ export class CountDownComponent implements OnInit {
     this.contadorFocus = 0;
 
     //GUARDAR TEMPS TOTAL DEL BLOC
+    this.tiempoBloque = this.secondsToString(this.auxSumaSegundos);
+
     let taskDay = new Date();
-    //let ajustarSegundos = (this.auxSumaSegundos);
-    if(this.auxSumaSegundos > 60 && this.auxSumaSegundos < 120){
-      let ajustarSegundos1 = this.auxSumaSegundos - (1 * 60);
-      this.tiempoBloque = this.updateTime(String(this.auxSumaMinutos)) + ":" + this.updateTime(String(ajustarSegundos1));
-    }else{
-      let ajustarSegundos2 = this.auxSumaSegundos - (this.auxSumaMinutos * 60);
-      this.tiempoBloque = this.updateTime(String(this.auxSumaMinutos)) + ":" + this.updateTime(String(ajustarSegundos2));
-    }
     this.tareaBloque = taskDay.getDate() + "-" + this.updateTime(String(taskDay.getMonth() + 1)) + " / " + this.inputElement.inputTask.nativeElement.value;
 
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
@@ -279,6 +261,19 @@ export class CountDownComponent implements OnInit {
     return this.settingsArray;
   }
 
+  secondsToString(seconds: number) {
+    var hour = Math.floor(seconds / 3600);
+    let stringHour = (hour < 10) ? '0' + hour : hour;
+
+    var minute = Math.floor((seconds / 60) % 60);
+    let stringMinute = (minute < 10) ? '0' + minute : minute;
+
+    var second = seconds % 60;
+    let stringSeconds = (second < 10) ? '0' + second : second;
+
+    return stringHour + ':' + stringMinute + ':' + stringSeconds;
+  }
+
 }
 
 export const observable = new Observable(Subscriber => {
@@ -287,3 +282,4 @@ export const observable = new Observable(Subscriber => {
 
   }, 1000);
 })
+
