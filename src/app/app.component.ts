@@ -18,7 +18,6 @@ export class AppComponent {
   ngAfterViewInit() {
     observable.subscribe((res) => {
       this.buttonMenuDisabled = res;
-      console.log(this.buttonMenuDisabled);  
     });
   }
 

@@ -16,6 +16,7 @@ table {
 th,
 td {
     font-size: 1em;
+    font-weight: normal;
 }
 
 @media (min-width:360px) {
