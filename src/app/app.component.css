@@ -11,6 +11,12 @@ body{
     width: 100%;
 }
 
+hr{
+    margin-top: 13px;
+    margin-bottom: 10px;
+
+}
+
 button {
     margin: 10px 10px 0px 10px;
     border-radius: 10px;
@@ -22,6 +28,7 @@ button {
 .container{
     text-align: center;
     display: block;
+    margin-top: -20px;
 }
 
 @font-face {
