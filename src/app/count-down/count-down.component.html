@@ -1,14 +1,10 @@
 <app-form></app-form>
 
 <div id="clockAndBtn" class="container">
-    
-    <h1 id="reloj" #reloj class="bg-warning shadow-lg" *ngIf="firstTimer; else defaultView">{{settingsArray[0]}}:00</h1>
-     
-      <ng-template #defaultView>
-            <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{setMinutes}}:{{setSeconds}}0</h1>
-      </ng-template>
 
-    <button #start class="btn btn-warning btn-lg shadow-lg" value="false" (click)="btnStart(settingsArray[0], 0)">START</button>
+    <h1 id="reloj" #reloj class="bg-warning shadow-lg">{{this.settingsArray[0]}}:00</h1>
+
+    <button #start class="btn btn-warning btn-lg shadow-lg" value="false" (click)="btnStart(this.settingsArray[0],0)">START</button>
 
     <button #pause class="btn btn-warning btn-lg shadow-lg" (click)="pauseCountDown(contador)">PAUSE</button>
 
@@ -18,15 +14,13 @@
 
 <div class="container">
 
-    <button id="infoBlocks"class="btn btn-warning btn-lg shadow-lg">{{contadorFocus}}/4</button>
+    <button id="infoBlocks" class="btn btn-warning btn-lg shadow-lg">{{contadorFocus}}/4</button>
 
 </div>
 
 <div class="container">
 
-    <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg" (click)="stopPomodoro()">FINISH POMODORO</button>
+    <button #stop style="width: 315px; height: 50px; margin-top: 2px;" class="btn btn-warning btn-lg shadow-lg"
+        (click)="stopPomodoro()">FINISH POMODORO</button>
 
 </div>
-
-
-

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { FormComponent } from '../form/form.component';
+import { SettingsComponent } from '../settings/settings.component';
 
 @Component({
   selector: 'app-count-down',
@@ -24,10 +25,10 @@ export class CountDownComponent implements OnInit {
   contador: any;
   setMinutes: number;
   setSeconds: number;
-  initialMinutes: number;
-  initialSeconds: number;
-  minutes: number;
-  seconds: number;
+  initialMinutes: number = 0;
+  initialSeconds: number = 0;
+  minutes: number = 0;
+  seconds: number = 0;
   textMinutes: string;
   textSeconds: string;
   //
@@ -49,7 +50,7 @@ export class CountDownComponent implements OnInit {
   estadisticasArray: any = [];
 
   //ARRAY SETTINGS REBRE DADES
-  settingsArray: any = [];
+  settingsArray: any = [25,5,15];
 
   //VISTA RELOJ CONTROLADOR
   firstTimer: boolean = true;
@@ -224,6 +225,7 @@ export class CountDownComponent implements OnInit {
 
     //REINICIAR COUNTDOWN Y BUTTONS ESTIL D'INICI
     this.focusTime(this.settingsArray[0], 0);
+    this.date.nativeElement.innerHTML = this.settingsArray[0] + ':' + "00";
     this.pauseCountDown(this.contador);
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
