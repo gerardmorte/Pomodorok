@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { FormComponent } from '../form/form.component';
+import { FormComponent, observable2 } from '../form/form.component';
 import { SettingsComponent } from '../settings/settings.component';
 
 @Component({
@@ -59,6 +59,9 @@ export class CountDownComponent implements OnInit {
   sumaSegundos: number = 0;
   auxSumaSegundos: number = 0;
 
+  //PRUEBA CAMBIAR ESTADO BTN START
+  buttonStartDisabled: any = "";
+
   ngOnInit(): void {
     this.getEstadisticas();
     this.getSettings();
@@ -68,6 +71,13 @@ export class CountDownComponent implements OnInit {
     this.buttonPause.nativeElement.disabled = true;
     this.buttonNext.nativeElement.disabled = true;
     this.buttonStop.nativeElement.disabled = true;
+    this.buttonStart.nativeElement.disabled = true;
+
+    //////
+    observable2.subscribe((res) => {
+      this.buttonStartDisabled = res;
+    });
+    //////
   }
 
   updateTime(i: string) {
@@ -198,7 +208,7 @@ export class CountDownComponent implements OnInit {
     this.auxSumaSegundos += this.sumaSegundos;
 
     CountDownComponent.auxFirstStart = "";
-
+    
     this.pauseCountDown(this.contador);
 
     this.contadorBreaks = 0;
@@ -229,6 +239,8 @@ export class CountDownComponent implements OnInit {
     this.inputElement.inputTask.nativeElement.disabled = false;
     this.saveElement.saveTask.nativeElement.disabled = false;
     this.firstStart = false;
+
+    this.buttonStart.nativeElement.disabled = true;
 
     //PLAYSOUND
     this.playSound();
@@ -282,4 +294,6 @@ export const observable = new Observable(Subscriber => {
 
   }, 1000);
 })
+
+
 

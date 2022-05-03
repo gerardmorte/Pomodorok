@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -12,25 +13,37 @@ export class FormComponent implements OnInit {
   @ViewChild('editTask') editTask: ElementRef;
 
   inputForm: string = ""
+  static enabledBtnStart: string = "disabled"; 
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.editTask.nativeElement.disabled = true;
-   }
+  }
 
   save() {
     this.inputForm = this.inputTask.nativeElement.value;
     this.inputTask.nativeElement.disabled = true;
     this.saveTask.nativeElement.disabled = true;
     this.editTask.nativeElement.disabled = false;
+
+    FormComponent.enabledBtnStart = "";
+
   }
 
-  edit(){ //Només es pot activar amb el comptador en PAUSA
+  edit() { 
     this.inputTask.nativeElement.disabled = false;
     this.saveTask.nativeElement.disabled = false;
     this.editTask.nativeElement.disabled = true;
   }
 }
+
+//////////////////
+export const observable2 = new Observable(Subscriber => {
+  setInterval(function () {
+    Subscriber.next(FormComponent.enabledBtnStart);
+  }, 1000);
+})
+//////////////
