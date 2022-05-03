@@ -208,7 +208,7 @@ export class CountDownComponent implements OnInit {
     this.auxSumaSegundos += this.sumaSegundos;
 
     CountDownComponent.auxFirstStart = "";
-    
+
     this.pauseCountDown(this.contador);
 
     this.contadorBreaks = 0;
@@ -241,6 +241,7 @@ export class CountDownComponent implements OnInit {
     this.firstStart = false;
 
     this.buttonStart.nativeElement.disabled = true;
+    FormComponent.enabledBtnStart = "disabled";
 
     //PLAYSOUND
     this.playSound();
@@ -294,6 +295,8 @@ export const observable = new Observable(Subscriber => {
 
   }, 1000);
 })
+
+
 
 
 
