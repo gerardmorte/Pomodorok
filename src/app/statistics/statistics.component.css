@@ -9,6 +9,10 @@ table {
     text-align: center;
 }
 
+#infoTask{
+    text-align: left;
+}
+
 .container{
     max-height: 400px;
 }

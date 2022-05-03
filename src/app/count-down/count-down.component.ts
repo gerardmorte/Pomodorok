@@ -208,7 +208,7 @@ export class CountDownComponent implements OnInit {
     this.tiempoBloque = this.secondsToString(this.auxSumaSegundos);
 
     let taskDay = new Date();
-    this.tareaBloque = taskDay.getDate() + "-" + this.updateTime(String(taskDay.getMonth() + 1)) + " / " + this.inputElement.inputTask.nativeElement.value;
+    this.tareaBloque = this.updateTime(String(taskDay.getDate())) + "-" + this.updateTime(String(taskDay.getMonth() + 1)) + " / " + this.inputElement.inputTask.nativeElement.value;
 
     //NETEJAR TEMPS TOTAL DEL BLOC I TEXT FORMULARI.
     this.totalMin, this.totalSec, this.auxTotalMin, this.auxTotalSec = 0;
