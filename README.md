@@ -1,4 +1,4 @@
-# PomodoroWebApp
+# Pomodorok
 
 ## Enlace:
 * 🍅👌 https://pomodorok.netlify.app/
