@@ -189,7 +189,7 @@ export class CountDownComponent implements OnInit {
 
   playSound() {
     let audio = new Audio();
-    audio.src = ".//src/assets/audio/notification.wav";
+    audio.src = "./assets/audio/notification.wav";
     audio.load();
     audio.play();
   }
