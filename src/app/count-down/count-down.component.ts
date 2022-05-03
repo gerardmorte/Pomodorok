@@ -121,7 +121,7 @@ export class CountDownComponent implements OnInit {
   pauseCountDown(timer: any) {
     clearInterval(timer);
     this.buttonStart.nativeElement.disabled = false;
-    this.editElement.editTask.nativeElement.disabled = false;
+    //this.editElement.editTask.nativeElement.disabled = false;
   }
 
   restartCountDown() {
