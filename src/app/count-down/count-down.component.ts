@@ -73,11 +73,11 @@ export class CountDownComponent implements OnInit {
     this.buttonStop.nativeElement.disabled = true;
     this.buttonStart.nativeElement.disabled = true;
 
-    //////
+    //Observable de formComponent, cuando click en save, boton Start se activa.
     observable2.subscribe((res) => {
       this.buttonStartDisabled = res;
     });
-    //////
+
   }
 
   updateTime(i: string) {

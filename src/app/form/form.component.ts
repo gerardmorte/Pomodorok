@@ -40,10 +40,9 @@ export class FormComponent implements OnInit {
   }
 }
 
-//////////////////
+//Observable para activar boton start cuando empieza Pomodoro.
 export const observable2 = new Observable(Subscriber => {
   setInterval(function () {
     Subscriber.next(FormComponent.enabledBtnStart);
   }, 1000);
 })
-//////////////
