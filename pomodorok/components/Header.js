@@ -1,16 +1,24 @@
 import React from "react";
+import { Navbar } from "flowbite-react";
 
 export default function Header() {
   return (
-    <>
-      <div className="w-100 bg-slate-800 p-5 flex items-baseline justify-around">
-        <h1 className="text-3xl text-white font-bold">Pomodorok</h1>
-        <ul className="flex gap-5 text-2xl text-white">
-          <li>Home</li>
-          <li>Statistics</li>
-          <li>Settings</li>
-        </ul>
-      </div>
-    </>
+    <Navbar className="bg-slate-800">
+      <Navbar.Brand href="#">
+        <h1 className="text-4xl text-white font-bold">Pomodorok</h1>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Navbar.Link href="#" active={true} className="text-2xl text-white">
+          <h2>Home</h2>
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-2xl text-white">
+          <h2>Statistics</h2>
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-2xl text-white">
+          <h2>Settings</h2>
+        </Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
