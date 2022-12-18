@@ -1,24 +1,36 @@
 import React from "react";
-import { Navbar } from "flowbite-react";
+import { useState } from "react";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState("hidden");
+
+  function handleClick() {
+    if (menuOpen === "hidden") {
+      setMenuOpen("visible");
+    }
+    if (menuOpen === "visible") {
+      setMenuOpen("hidden");
+    }
+  }
+
   return (
-    <Navbar className="bg-slate-800">
-      <Navbar.Brand href="#">
-        <h1 className="text-4xl text-white font-bold">Pomodorok</h1>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        <Navbar.Link href="#" active={true} className="text-2xl text-white">
-          <h2>Home</h2>
-        </Navbar.Link>
-        <Navbar.Link href="#" className="text-2xl text-white">
-          <h2>Statistics</h2>
-        </Navbar.Link>
-        <Navbar.Link href="#" className="text-2xl text-white">
-          <h2>Settings</h2>
-        </Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
+    <>
+      <div>
+        <div className="w-100 bg-slate-800 p-5 md:flex items-baseline justify-around">
+          <button
+            className="text-red-700 text-2xl md:hidden absolute right-0 mr-4 mt-1"
+            onClick={handleClick}
+          >
+            X
+          </button>
+          <h1 className="text-3xl text-white font-bold">Pomodorok</h1>
+          <ul className={`md:flex gap-10 text-2xl text-white mt-4 ${menuOpen}`}>
+            <li className="mt-2">Home</li>
+            <li className="mt-2">Statistics</li>
+            <li className="mt-2">Settings</li>
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
