@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <main className="h-screen">
         <Header />
-        <div className="flex items-center justify-center mt-32">
+        <div className="flex items-center justify-center mt-28">
           <Timer />
         </div>
       </main>

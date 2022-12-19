@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <>
       <div>
-        <div className="w-100 bg-slate-800 p-5 md:flex items-center justify-around">
+        <div className="w-100 bg-zinc-900 p-5 md:flex items-center justify-around">
           <div className="md:hidden absolute right-0 mr-4">
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
