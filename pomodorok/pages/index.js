@@ -1,10 +1,6 @@
 import Head from "next/head";
-// import Image from "next/image";
-// import { Inter } from '@next/font/google'
-import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
-
-// const inter = Inter({ subsets: ['latin'] })
+import Timer from "../components/Pomodoro";
 
 export default function Home() {
   return (
@@ -15,15 +11,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className="h-screen">
         <Header />
+        <div className="flex items-center justify-center mt-40">
+          <Timer />
+        </div>
       </main>
     </>
   );
-}
-
-{
-  /* <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2> */
 }
