@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Header from "../components/Header";
 import Timer from "../components/Pomodoro";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       </Head>
       <main className="h-screen">
         <Header />
-        <div className="flex items-center justify-center mt-28">
+        <div className="flex items-center mt-28 gap-10 justify-center">
+          <Image src="/pomodoro.png" width={300} height={300} alt="Pomodoro" />
           <Timer />
         </div>
       </main>
