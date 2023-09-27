@@ -1,2 +1,2 @@
-# Pomodorok
-🍅👌 https://pomodorok.netlify.app/
+# Pomodorok 🍅👌
+https://pomodorok.netlify.app/
