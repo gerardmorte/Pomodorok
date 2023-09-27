@@ -1,9 +1,2 @@
 # Pomodorok
-
-## Enlace:
-* 🍅👌 https://pomodorok.netlify.app/
-
-## Tecnologías usadas:
-* ANGULAR + BOOTSTRAP
-
-
+🍅👌 https://pomodorok.netlify.app/
